@@ -1,0 +1,52 @@
+const {
+  getUserByNIK,
+  getUserByID,
+  createUser,
+} = require("../repositories/auth");
+
+const jsonwebtoken = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+
+exports.register = async (payload) => {
+  const existingUser = await getUserByNIK(payload.nik);
+
+  if (existingUser) {
+    throw new Error("NIK sudah terdaftar");
+  }
+
+  let user = await createUser(payload);
+
+  delete user.dataValues.password;
+
+  const jwtPayload = {
+    id: user.id,
+  };
+
+  const token = jsonwebtoken.sign(jwtPayload, process.env.JWT_SECRET, {
+    expiresIn: "5h",
+  });
+
+  const data = {
+    user,
+    token,
+  };
+
+  return data;
+};
+
+exports.profile = async (id) => {
+  // get the user
+  let data = await getUserByID(id);
+  if (!data) {
+    throw new Error(`User is not found!`);
+  }
+
+  // delete password
+  if (data?.dataValues?.password) {
+    delete data?.dataValues?.password;
+  } else {
+    delete data?.password;
+  }
+
+  return data;
+};
