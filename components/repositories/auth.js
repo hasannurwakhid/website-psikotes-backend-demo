@@ -35,11 +35,6 @@ exports.createUser = async (payload) => {
 
 exports.getUserByID = async (id) => {
   // get from db
-  const data = await User.findOne({ where: { nik } });
-
-  if (data.length > 0) {
-    return data[0];
-  }
-
-  throw new Error(`User is not found!`);
+  const data = await User.findOne({ where: { id } });
+  return data;
 };

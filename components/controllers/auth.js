@@ -1,4 +1,4 @@
-const { register } = require("../services/auth");
+const { register, login } = require("../services/auth");
 
 exports.register = async (req, res, next) => {
   try {
@@ -8,31 +8,31 @@ exports.register = async (req, res, next) => {
 
     if (nik == "" || !nik) {
       return next({
-        message: "NIK must be filled!",
+        message: "NIK harus diisi!",
         statusCode: 400,
       });
     }
     if (name == "" || !name) {
       return next({
-        message: "Name must be filled!",
+        message: "Name harus diisi!",
         statusCode: 400,
       });
     }
     if (email == "" || !email) {
       return next({
-        message: "Email must be filled!",
+        message: "Email harus diisi!",
         statusCode: 400,
       });
     }
     if (phoneNumber == "" || !phoneNumber) {
       return next({
-        message: "Phone Number must be filled!",
+        message: "Phone Number harus diisi!",
         statusCode: 400,
       });
     }
     if (password == "" || !password) {
       return next({
-        message: "Password must be filled!",
+        message: "Password harus diisi!",
         statusCode: 400,
       });
     }
@@ -49,6 +49,47 @@ exports.register = async (req, res, next) => {
 
     res.status(200).json({
       message: "Register Berhasil",
+      data,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.login = async (req, res, next) => {
+  try {
+    const { nik, password } = req.body;
+    if (nik == "" || !nik) {
+      return next({
+        message: "NIK harus diisi!",
+        statusCode: 400,
+      });
+    }
+    if (password == "" || !password) {
+      return next({
+        message: "Password harus diisi!",
+        statusCode: 400,
+      });
+    }
+
+    const data = await login({ nik, password });
+
+    res.status(200).json({
+      message: "Success",
+      data,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.profile = async (req, res, next) => {
+  try {
+    // get user by id
+    const data = req.user;
+
+    res.status(200).json({
+      message: "Success",
       data,
     });
   } catch (error) {

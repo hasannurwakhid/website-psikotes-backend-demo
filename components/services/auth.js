@@ -34,6 +34,39 @@ exports.register = async (payload) => {
   return data;
 };
 
+exports.login = async (payload) => {
+  let user = await getUserByNIK(payload.nik);
+  if (!user) {
+    throw new Error(`NIK belum terdaftar`);
+  }
+
+  const isValid = await bcrypt.compare(payload.password, user?.password);
+  if (!isValid) {
+    throw new Error(`Password salah`);
+  }
+
+  if (user?.dataValues?.password) {
+    delete user?.dataValues?.password;
+  } else {
+    delete user?.password;
+  }
+
+  const jwtPayload = {
+    id: user.id,
+  };
+
+  const token = jsonwebtoken.sign(jwtPayload, process.env.JWT_SECRET, {
+    expiresIn: "5h",
+  });
+
+  const data = {
+    user,
+    token,
+  };
+
+  return data;
+};
+
 exports.profile = async (id) => {
   // get the user
   let data = await getUserByID(id);
