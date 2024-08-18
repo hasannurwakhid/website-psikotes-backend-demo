@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Question.hasMany(models.MultipleChoice, { foreignKey: "questionId" });
+      Question.belongsTo(models.Category, { foreignKey: "categoryId" });
     }
   }
   Question.init(
@@ -17,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       question: DataTypes.TEXT,
       image: DataTypes.TEXT,
       point: DataTypes.INTEGER,
+      categoryId: DataTypes.INTEGER,
     },
     {
       sequelize,

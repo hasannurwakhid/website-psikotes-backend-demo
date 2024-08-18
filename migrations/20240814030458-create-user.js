@@ -37,6 +37,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      isDone: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true,
+      },
       image: {
         type: Sequelize.TEXT,
         allowNull: true,

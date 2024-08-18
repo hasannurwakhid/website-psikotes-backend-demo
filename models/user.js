@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       pointTotal: DataTypes.INTEGER,
       totalTime: DataTypes.INTEGER,
       role: DataTypes.STRING,
+      isDone: DataTypes.BOOLEAN,
       image: DataTypes.TEXT,
     },
     {

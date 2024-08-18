@@ -44,6 +44,8 @@ exports.register = async (req, res, next) => {
       phoneNumber,
       password,
       image,
+      isDone: false,
+      totalPoint: 0,
       role: "peserta",
     });
 

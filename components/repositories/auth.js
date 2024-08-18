@@ -38,3 +38,17 @@ exports.getUserByID = async (id) => {
   const data = await User.findOne({ where: { id } });
   return data;
 };
+
+exports.updateUserById = async (id, payload) => {
+  const data = await User.update(payload, {
+    where: {
+      id,
+    },
+  });
+  return data;
+};
+
+exports.getUsers = async () => {
+  const data = await User.findAll();
+  return data;
+};
