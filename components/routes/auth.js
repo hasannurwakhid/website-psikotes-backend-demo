@@ -1,6 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const { register, login, profile } = require("../controllers/auth");
+const {
+  register,
+  adminRegister,
+  login,
+  profile,
+  getAllAdmins,
+  getAllPeserta,
+  updateAdminAccoundtById,
+  deleteAdminById,
+  deletePesertaById,
+} = require("../controllers/auth");
 const { authMiddleware } = require("../../src/middleware/auth");
 
 router.post("/register", register);
@@ -11,5 +21,22 @@ router.get(
   profile
 );
 
+router
+  .route("/peserta")
+  .get(authMiddleware(["admin", "superadmin"]), getAllPeserta);
+
+router
+  .route("/admins")
+  .get(authMiddleware(["superadmin"]), getAllAdmins)
+  .post(authMiddleware(["superadmin"]), adminRegister);
+
+router
+  .route("/admins/:id")
+  .put(authMiddleware(["superadmin"]), updateAdminAccoundtById)
+  .delete(authMiddleware(["superadmin"]), deleteAdminById);
+
+router
+  .route("/peserta/:id")
+  .delete(authMiddleware(["admin", "superadmin"]), deletePesertaById);
 
 module.exports = router;

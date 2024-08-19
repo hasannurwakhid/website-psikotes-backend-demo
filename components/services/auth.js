@@ -1,7 +1,11 @@
 const {
   getUserByNIK,
+  getUserByNIP,
   getUserByID,
   createUser,
+  getUsersByRole,
+  updateUserById,
+  deleteUserById,
 } = require("../repositories/auth");
 
 const jsonwebtoken = require("jsonwebtoken");
@@ -29,6 +33,33 @@ exports.register = async (payload) => {
   const data = {
     user,
     token,
+  };
+
+  return data;
+};
+
+exports.adminRegister = async (payload) => {
+  const existingUser = await getUserByNIP(payload.nip);
+
+  if (existingUser) {
+    throw new Error("NIP sudah terdaftar");
+  }
+
+  let user = await createUser(payload);
+
+  // delete user.dataValues.password;
+
+  // const jwtPayload = {
+  //   id: user.id,
+  // };
+
+  // const token = jsonwebtoken.sign(jwtPayload, process.env.JWT_SECRET, {
+  //   expiresIn: "5h",
+  // });
+
+  const data = {
+    user,
+    // token,
   };
 
   return data;
@@ -81,5 +112,20 @@ exports.profile = async (id) => {
     delete data?.password;
   }
 
+  return data;
+};
+
+exports.getUsersByRole = async (role) => {
+  const data = await getUsersByRole(role);
+  return data;
+};
+
+exports.updateUserById = async (id, payload) => {
+  const data = await updateUserById(id, payload);
+  return data;
+};
+
+exports.deleteUserById = async (id) => {
+  const data = await deleteUserById(id);
   return data;
 };

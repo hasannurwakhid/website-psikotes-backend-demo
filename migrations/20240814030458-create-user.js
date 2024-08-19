@@ -11,7 +11,11 @@ module.exports = {
       },
       nik: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
+      },
+      nip: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       name: {
         type: Sequelize.STRING,
