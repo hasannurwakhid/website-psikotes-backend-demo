@@ -22,17 +22,17 @@ exports.register = async (payload) => {
 
   delete user.dataValues.password;
 
-  const jwtPayload = {
-    id: user.id,
-  };
+  // const jwtPayload = {
+  //   id: user.id,
+  // };
 
-  const token = jsonwebtoken.sign(jwtPayload, process.env.JWT_SECRET, {
-    expiresIn: "5h",
-  });
+  // const token = jsonwebtoken.sign(jwtPayload, process.env.JWT_SECRET, {
+  //   expiresIn: "5h",
+  // });
 
   const data = {
     user,
-    token,
+    // token,
   };
 
   return data;
