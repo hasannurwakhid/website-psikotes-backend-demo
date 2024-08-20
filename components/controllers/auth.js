@@ -9,7 +9,7 @@ const {
   updateUserById,
 } = require("../services/auth");
 
-exports.register = async (req, res, next) => {
+exports.registerPeserta = async (req, res, next) => {
   try {
     const { nik, name, email, phoneNumber, password } = req.body;
 
@@ -195,7 +195,17 @@ exports.profile = async (req, res, next) => {
 
 exports.updateAdminAccoundtById = async (req, res, next) => {
   try {
-    const { adminId, nip, name, email, phoneNumber, password } = req.body;
+    const { nip, name, email, phoneNumber, password } = req.body;
+
+    const id = req?.params?.id;
+    const selectedAdmin = await profile(id);
+
+    if (selectedAdmin.role !== "admin") {
+      return next({
+        message: "Akun yang akan diupdate bukan akun admin",
+        statusCode: 403,
+      });
+    }
 
     // const userPhoto = req?.user?.image;
     // let image;
@@ -236,7 +246,7 @@ exports.updateAdminAccoundtById = async (req, res, next) => {
       });
     }
 
-    const data = await updateUserById(adminId, {
+    const data = await updateUserById(id, {
       nip,
       name,
       email,
@@ -244,6 +254,12 @@ exports.updateAdminAccoundtById = async (req, res, next) => {
       password,
       image,
     });
+
+    if (data?.dataValues?.password) {
+      delete data?.dataValues?.password;
+    } else {
+      delete data?.password;
+    }
 
     res.status(200).json({
       message: "Update Berhasil",

@@ -56,11 +56,12 @@ exports.updateUserById = async (id, payload) => {
       const imageUpload = await uploader(image);
       payload.image = imageUpload.secure_url;
     }
-    const data = await User.update(payload, {
+    await User.update(payload, {
       where: {
         id,
       },
     });
+    const data = await User.findOne({ where: { id } });
     return data;
   } else {
     throw new Error(`not found!`);

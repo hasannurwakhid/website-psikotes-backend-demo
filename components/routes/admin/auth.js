@@ -2,9 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const { authMiddleware } = require("../../../src/middleware/auth");
-    const { loginPeserta, registerPeserta } = require("../../controllers/auth");
+const { loginAdmin } = require("../../controllers/auth");
 
-router.post("/login", loginPeserta);
-router.post("/register", registerPeserta);
+router.post("/login", loginAdmin);
 
 module.exports = router;
