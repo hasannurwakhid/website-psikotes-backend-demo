@@ -3,14 +3,10 @@ const router = express.Router();
 const {
   calculateTotalPoint,
   getAveragePesertaPoints,
-} = require("../controllers/totalPoint");
-const { authMiddleware } = require("../../src/middleware/auth");
+} = require("../../controllers/totalPoint");
+const { authMiddleware } = require("../../../src/middleware/auth");
 
-router.get(
-  "/calculatePoint",
-  authMiddleware(["peserta", "admin", "superadmin"]),
-  calculateTotalPoint
-);
+router.get("/calculatePoint", authMiddleware(["peserta"]), calculateTotalPoint);
 
 // router.get(
 //   "/average",
