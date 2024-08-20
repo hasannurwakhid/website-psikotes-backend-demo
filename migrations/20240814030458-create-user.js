@@ -12,10 +12,12 @@ module.exports = {
       nik: {
         type: Sequelize.STRING,
         allowNull: true,
+        unique: true,
       },
       nip: {
         type: Sequelize.STRING,
         allowNull: true,
+        unique: true,
       },
       name: {
         type: Sequelize.STRING,

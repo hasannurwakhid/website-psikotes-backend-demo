@@ -1,7 +1,8 @@
 const {
   register,
   adminRegister,
-  login,
+  loginPeserta,
+  loginAdmin,
   getUsersByRole,
   deleteUserById,
   profile,
@@ -124,7 +125,7 @@ exports.adminRegister = async (req, res, next) => {
   }
 };
 
-exports.login = async (req, res, next) => {
+exports.loginPeserta = async (req, res, next) => {
   try {
     const { nik, password } = req.body;
     if (nik == "" || !nik) {
@@ -140,7 +141,34 @@ exports.login = async (req, res, next) => {
       });
     }
 
-    const data = await login({ nik, password });
+    const data = await loginPeserta({ nik, password });
+
+    res.status(200).json({
+      message: "Success",
+      data,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.loginAdmin = async (req, res, next) => {
+  try {
+    const { nip, password } = req.body;
+    if (nip == "" || !nip) {
+      return next({
+        message: "NIP harus diisi!",
+        statusCode: 400,
+      });
+    }
+    if (password == "" || !password) {
+      return next({
+        message: "Password harus diisi!",
+        statusCode: 400,
+      });
+    }
+
+    const data = await loginAdmin({ nip, password });
 
     res.status(200).json({
       message: "Success",

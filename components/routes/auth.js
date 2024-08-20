@@ -3,7 +3,7 @@ const router = express.Router();
 const {
   register,
   adminRegister,
-  login,
+  loginPeserta,
   profile,
   getAllAdmins,
   getAllPeserta,
@@ -14,7 +14,7 @@ const {
 const { authMiddleware } = require("../../src/middleware/auth");
 
 router.post("/register", register);
-router.post("/login", login);
+router.post("/login", loginPeserta);
 router.get(
   "/profile",
   authMiddleware(["peserta", "admin", "superadmin"]),

@@ -3,7 +3,6 @@ const { uploader } = require("../../src/helper/cloudinary");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 const path = require("path");
-const { where } = require("sequelize");
 
 exports.getUserByNIK = async (nik) => {
   const data = await User.findOne({ where: { nik } });
