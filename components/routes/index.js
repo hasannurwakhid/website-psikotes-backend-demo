@@ -34,12 +34,8 @@ const pesertaRoutes = require("./peserta");
 const adminRoutes = require("./admin");
 const superadminRoutes = require("./superadmin");
 
-const categoriesRoutes = require("./category");
-
 router.use("/peserta", pesertaRoutes);
 router.use("/admin", adminRoutes);
 router.use("/superadmin", superadminRoutes);
-
-router.use("/categories", categoriesRoutes);
 
 module.exports = router;

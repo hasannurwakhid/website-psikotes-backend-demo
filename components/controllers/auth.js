@@ -301,7 +301,10 @@ exports.deletePesertaById = async (req, res, next) => {
     const peserta = await profile(id);
 
     if (peserta.role !== "peserta") {
-      throw new Error("Akun yang akan dihapus bukan akun peserta");
+      return next({
+        message: "Akun yang akan dihapus bukan akun peserta",
+        statusCode: 403,
+      });
     }
     const data = await deleteUserById(id);
     res.status(200).json({
@@ -320,7 +323,10 @@ exports.deleteAdminById = async (req, res, next) => {
     const peserta = await profile(id);
 
     if (peserta.role !== "admin") {
-      throw new Error("Akun yang akan dihapus bukan akun admin");
+      return next({
+        message: "Akun yang akan dihapus bukan akun admin",
+        statusCode: 403,
+      });
     }
     const data = await deleteUserById(id);
     res.status(200).json({

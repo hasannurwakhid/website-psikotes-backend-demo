@@ -6,13 +6,13 @@ module.exports = {
     await queryInterface.bulkInsert("Categories", [
       {
         category: "Sinonim",
-        time: 15 * 60 * 1000,
+        // time: 15 * 60 * 1000,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         category: "Antonim",
-        time: 15 * 60 * 1000,
+        // time: 15 * 60 * 1000,
         createdAt: new Date(),
         updatedAt: new Date(),
       },

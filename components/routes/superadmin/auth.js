@@ -3,6 +3,7 @@ const router = express.Router();
 const {
   adminRegister,
   getAllAdmins,
+  deleteAdminById,
   updateAdminAccoundtById,
 } = require("../../controllers/auth");
 const { authMiddleware } = require("../../../src/middleware/auth");
@@ -15,6 +16,6 @@ router
 router
   .route("/admin/:id")
   .put(authMiddleware(["superadmin"]), updateAdminAccoundtById)
-  .delete(authMiddleware(["superadmin"]));
+  .delete(authMiddleware(["superadmin"]), deleteAdminById);
 
 module.exports = router;

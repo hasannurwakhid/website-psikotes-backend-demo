@@ -1,10 +1,8 @@
 const express = require("express");
 const router = express.Router();
-
+const { getCategories, createCategory } = require("../../controllers/category");
 const { authMiddleware } = require("../../../src/middleware/auth");
-const { loginPeserta, registerPeserta } = require("../../controllers/auth");
 
-router.post("/login", loginPeserta);
-router.post("/register", registerPeserta);
+router.route("/").post(authMiddleware(["admin", "superadmin"]), createCategory);
 
 module.exports = router;
