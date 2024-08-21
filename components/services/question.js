@@ -3,6 +3,10 @@ const {
   getPesertaQuestions,
 } = require("../repositories/question");
 
+const { createMultipleChoice } = require("../repositories/multipleChoice");
+
+const { createAnswerKey } = require("../repositories/answerKeys");
+
 exports.getQuestionsByCategory = async (payload) => {
   const data = await getQuestionsByCategory(payload);
 
@@ -23,3 +27,5 @@ exports.getPesertaQuestions = async (payload) => {
     return shuffledData;
   }
 };
+
+exports.createQuestion = async (payload) => {};

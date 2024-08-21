@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   MultipleChoice.init(
     {
+      image: DataTypes.TEXT,
       description: DataTypes.TEXT,
       questionId: DataTypes.INTEGER,
     },

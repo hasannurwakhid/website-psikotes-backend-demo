@@ -9,9 +9,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      image: {
+        type: Sequelize.TEXT,
+        allowNull: true,
+      },
       description: {
         type: Sequelize.TEXT,
-        allowNull: false,
+        allowNull: true,
       },
       questionId: {
         type: Sequelize.INTEGER,

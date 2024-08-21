@@ -52,3 +52,8 @@ exports.getPesertaQuestions = async (userId) => {
   });
   return data;
 };
+
+exports.createQuestion = async (payload) => {
+  const data = await Question.create(payload);
+  return data;
+};
