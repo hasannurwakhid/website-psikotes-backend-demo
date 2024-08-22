@@ -1,6 +1,9 @@
 const {
+  createQuestion,
+  getQuestionByIdForAdmin,
   getQuestionsByCategory,
   getPesertaQuestions,
+  deleteQuestionById,
 } = require("../repositories/question");
 
 const { createMultipleChoice } = require("../repositories/multipleChoice");
@@ -28,4 +31,47 @@ exports.getPesertaQuestions = async (payload) => {
   }
 };
 
-exports.createQuestion = async (payload) => {};
+exports.createQuestion = async (payload) => {
+  const { question, image, point, categoryId, multipleChoices, correctAnswer } =
+    payload;
+  const createdQuestion = await createQuestion({
+    question,
+    image,
+    point,
+    categoryId,
+  });
+
+  let correctAnswerId;
+
+  for (let i = 0; i < multipleChoices.length; i++) {
+    const createdMultipleChoice = await createMultipleChoice({
+      image: multipleChoices[i].image,
+      description: multipleChoices[i].description,
+      questionId: createdQuestion.id,
+    });
+
+    if (i + 1 === correctAnswer) {
+      correctAnswerId = createdMultipleChoice.id;
+    }
+  }
+
+  if (correctAnswerId) {
+    await createAnswerKey({
+      multipleChoiceId: correctAnswerId,
+    });
+  }
+
+  return getQuestionByIdForAdmin(createdQuestion.id);
+};
+
+exports.deleteQuestionById = async (id) => {
+  const data = await deleteQuestionById(id);
+
+  if (data === 0) {
+    const error = new Error("Data tidak ditemukan");
+    error.statusCode = 404;
+    throw error;
+  }
+
+  return data;
+};
