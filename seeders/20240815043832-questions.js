@@ -324,6 +324,774 @@ module.exports = {
         updatedAt: new Date(),
       },
     ]);
+
+    // soal 6 ===================================================================================================
+    questionId = await queryInterface.bulkInsert(
+      "Questions",
+      [
+        {
+          question: "Soal no 6",
+          image: null,
+          point: 10,
+          categoryId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      { returning: ["id"] }
+    );
+    multipleChoiceIdForAnswerKey = await queryInterface.bulkInsert(
+      "MultipleChoices",
+      [
+        {
+          image: null,
+          description: "jawaban a",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban b",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban c",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban d",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban e",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      { returning: ["id"] }
+    );
+    await queryInterface.bulkInsert("AnswerKeys", [
+      {
+        multipleChoiceId: multipleChoiceIdForAnswerKey[2].id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ]);
+
+    // soal 7 ===================================================================================================
+    questionId = await queryInterface.bulkInsert(
+      "Questions",
+      [
+        {
+          question: "Soal no 7",
+          image: null,
+          point: 10,
+          categoryId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      { returning: ["id"] }
+    );
+    multipleChoiceIdForAnswerKey = await queryInterface.bulkInsert(
+      "MultipleChoices",
+      [
+        {
+          image: null,
+          description: "jawaban a",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban b",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban c",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban d",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban e",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      { returning: ["id"] }
+    );
+    await queryInterface.bulkInsert("AnswerKeys", [
+      {
+        multipleChoiceId: multipleChoiceIdForAnswerKey[2].id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ]);
+
+    // soal 8 ===================================================================================================
+    questionId = await queryInterface.bulkInsert(
+      "Questions",
+      [
+        {
+          question: "Soal no 8",
+          image: null,
+          point: 10,
+          categoryId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      { returning: ["id"] }
+    );
+    multipleChoiceIdForAnswerKey = await queryInterface.bulkInsert(
+      "MultipleChoices",
+      [
+        {
+          image: null,
+          description: "jawaban a",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban b",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban c",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban d",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban e",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      { returning: ["id"] }
+    );
+    await queryInterface.bulkInsert("AnswerKeys", [
+      {
+        multipleChoiceId: multipleChoiceIdForAnswerKey[2].id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ]);
+
+    // soal 9 ===================================================================================================
+    questionId = await queryInterface.bulkInsert(
+      "Questions",
+      [
+        {
+          question: "Soal no 9",
+          image: null,
+          point: 10,
+          categoryId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      { returning: ["id"] }
+    );
+    multipleChoiceIdForAnswerKey = await queryInterface.bulkInsert(
+      "MultipleChoices",
+      [
+        {
+          image: null,
+          description: "jawaban a",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban b",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban c",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban d",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban e",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      { returning: ["id"] }
+    );
+    await queryInterface.bulkInsert("AnswerKeys", [
+      {
+        multipleChoiceId: multipleChoiceIdForAnswerKey[2].id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ]);
+
+    // soal 10 ===================================================================================================
+    questionId = await queryInterface.bulkInsert(
+      "Questions",
+      [
+        {
+          question: "Soal no 10",
+          image: null,
+          point: 10,
+          categoryId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      { returning: ["id"] }
+    );
+    multipleChoiceIdForAnswerKey = await queryInterface.bulkInsert(
+      "MultipleChoices",
+      [
+        {
+          image: null,
+          description: "jawaban a",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban b",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban c",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban d",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban e",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      { returning: ["id"] }
+    );
+    await queryInterface.bulkInsert("AnswerKeys", [
+      {
+        multipleChoiceId: multipleChoiceIdForAnswerKey[2].id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ]);
+
+    // soal 11 ===================================================================================================
+    questionId = await queryInterface.bulkInsert(
+      "Questions",
+      [
+        {
+          question: "Soal no 11",
+          image: null,
+          point: 10,
+          categoryId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      { returning: ["id"] }
+    );
+    multipleChoiceIdForAnswerKey = await queryInterface.bulkInsert(
+      "MultipleChoices",
+      [
+        {
+          image: null,
+          description: "jawaban a",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban b",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban c",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban d",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban e",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      { returning: ["id"] }
+    );
+    await queryInterface.bulkInsert("AnswerKeys", [
+      {
+        multipleChoiceId: multipleChoiceIdForAnswerKey[2].id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ]);
+
+    // soal 12 ===================================================================================================
+    questionId = await queryInterface.bulkInsert(
+      "Questions",
+      [
+        {
+          question: "Soal no 12",
+          image: null,
+          point: 10,
+          categoryId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      { returning: ["id"] }
+    );
+    multipleChoiceIdForAnswerKey = await queryInterface.bulkInsert(
+      "MultipleChoices",
+      [
+        {
+          image: null,
+          description: "jawaban a",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban b",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban c",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban d",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban e",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      { returning: ["id"] }
+    );
+    await queryInterface.bulkInsert("AnswerKeys", [
+      {
+        multipleChoiceId: multipleChoiceIdForAnswerKey[2].id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ]);
+
+    // soal 13 ===================================================================================================
+    questionId = await queryInterface.bulkInsert(
+      "Questions",
+      [
+        {
+          question: "Soal no 13",
+          image: null,
+          point: 10,
+          categoryId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      { returning: ["id"] }
+    );
+    multipleChoiceIdForAnswerKey = await queryInterface.bulkInsert(
+      "MultipleChoices",
+      [
+        {
+          image: null,
+          description: "jawaban a",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban b",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban c",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban d",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban e",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      { returning: ["id"] }
+    );
+    await queryInterface.bulkInsert("AnswerKeys", [
+      {
+        multipleChoiceId: multipleChoiceIdForAnswerKey[2].id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ]);
+
+    // soal 14 ===================================================================================================
+    questionId = await queryInterface.bulkInsert(
+      "Questions",
+      [
+        {
+          question: "Soal no 14",
+          image: null,
+          point: 10,
+          categoryId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      { returning: ["id"] }
+    );
+    multipleChoiceIdForAnswerKey = await queryInterface.bulkInsert(
+      "MultipleChoices",
+      [
+        {
+          image: null,
+          description: "jawaban a",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban b",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban c",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban d",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban e",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      { returning: ["id"] }
+    );
+    await queryInterface.bulkInsert("AnswerKeys", [
+      {
+        multipleChoiceId: multipleChoiceIdForAnswerKey[2].id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ]);
+
+    // soal 15 ===================================================================================================
+    questionId = await queryInterface.bulkInsert(
+      "Questions",
+      [
+        {
+          question: "Soal no 15",
+          image: null,
+          point: 10,
+          categoryId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      { returning: ["id"] }
+    );
+    multipleChoiceIdForAnswerKey = await queryInterface.bulkInsert(
+      "MultipleChoices",
+      [
+        {
+          image: null,
+          description: "jawaban a",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban b",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban c",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban d",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban e",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      { returning: ["id"] }
+    );
+    await queryInterface.bulkInsert("AnswerKeys", [
+      {
+        multipleChoiceId: multipleChoiceIdForAnswerKey[2].id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ]);
+
+    // soal 16 ===================================================================================================
+    questionId = await queryInterface.bulkInsert(
+      "Questions",
+      [
+        {
+          question: "Soal no 16",
+          image: null,
+          point: 10,
+          categoryId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      { returning: ["id"] }
+    );
+    multipleChoiceIdForAnswerKey = await queryInterface.bulkInsert(
+      "MultipleChoices",
+      [
+        {
+          image: null,
+          description: "jawaban a",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban b",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban c",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban d",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban e",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      { returning: ["id"] }
+    );
+    await queryInterface.bulkInsert("AnswerKeys", [
+      {
+        multipleChoiceId: multipleChoiceIdForAnswerKey[2].id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ]);
+
+    // soal 17 ===================================================================================================
+    questionId = await queryInterface.bulkInsert(
+      "Questions",
+      [
+        {
+          question: "Soal no 17",
+          image: null,
+          point: 10,
+          categoryId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      { returning: ["id"] }
+    );
+    multipleChoiceIdForAnswerKey = await queryInterface.bulkInsert(
+      "MultipleChoices",
+      [
+        {
+          image: null,
+          description: "jawaban a",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban b",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban c",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban d",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          image: null,
+          description: "jawaban e",
+          questionId: questionId[0].id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      { returning: ["id"] }
+    );
+    await queryInterface.bulkInsert("AnswerKeys", [
+      {
+        multipleChoiceId: multipleChoiceIdForAnswerKey[2].id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ]);
   },
 
   async down(queryInterface, Sequelize) {
