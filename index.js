@@ -4,6 +4,8 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const express = require("express");
 const router = require("./components/routes");
+const cron = require("node-cron");
+const { updateExpiredQuizzes } = require("./components/repositories/auth");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -21,6 +23,11 @@ app.use(
     tempFileDir: process.env.NODE_ENV == "development" ? "./tmp" : "/tmp",
   })
 );
+
+cron.schedule("*/1 * * * *", async () => {
+  // await updateExpiredQuizzes();
+  console.log("Checked for expired quizzes and updated isDone status");
+});
 
 app.use("/api", router);
 

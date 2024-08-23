@@ -6,6 +6,8 @@ const {
   deleteQuestionById,
 } = require("../repositories/question");
 
+const { updateUserById } = require("../repositories/auth");
+
 const { createMultipleChoice } = require("../repositories/multipleChoice");
 
 const { createAnswerKey } = require("../repositories/answerKeys");
@@ -19,8 +21,10 @@ exports.getQuestionsByCategory = async (payload) => {
 };
 
 exports.getPesertaQuestions = async (payload) => {
-  const { userId, pointTotal, isDone } = payload;
-
+  const { userId, pointTotal, isDone, startTime } = payload;
+  if (startTime) {
+    await updateUserById();
+  }
   if (isDone == true) {
     //return total poin
     return { pointTotal };

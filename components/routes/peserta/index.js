@@ -15,7 +15,7 @@ const categoriesRoutes = require("./category");
 router.use("/auth", authRoutes);
 router.use("/answerQuestion", answerQuestionRoutes);
 router.use("/getPesertaQuestions", getQuestionPesertaRoutes);
-router.use("/calculatePoint", calculatePointPesertaRoutes);
+router.use("/submit", calculatePointPesertaRoutes);
 router.use("/categories", categoriesRoutes);
 
 // router.use("/categories", categories);

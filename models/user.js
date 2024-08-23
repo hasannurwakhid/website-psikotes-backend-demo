@@ -25,6 +25,9 @@ module.exports = (sequelize, DataTypes) => {
       role: DataTypes.STRING,
       isDone: DataTypes.BOOLEAN,
       image: DataTypes.TEXT,
+      startTime: DataTypes.DATE,
+      endTime: DataTypes.DATE,
+      timeToEnd: DataTypes.DATE,
     },
     {
       sequelize,

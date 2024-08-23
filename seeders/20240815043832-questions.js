@@ -138,7 +138,7 @@ module.exports = {
       "Questions",
       [
         {
-          question: "Berikut ini yang termasuk hewan adalah?",
+          question: "Berikut ini yang termasuk tumbuhan adalah?",
           image: null,
           point: 99999999,
           categoryId: 1,
@@ -152,7 +152,7 @@ module.exports = {
       "MultipleChoices",
       [
         {
-          image: `https://res.cloudinary.com/dtkrxcjrr/image/upload/v1724238630/WhatsApp_Image_2024-08-21_at_18.07.59_7eb31ffe_lg1uiw.jpg`,
+          image: `https://res.cloudinary.com/dtkrxcjrr/image/upload/v1724380419/tumbuhan.jpg`,
           description: null,
           questionId: questionId[0].id,
           createdAt: new Date(),
@@ -267,7 +267,7 @@ module.exports = {
       [
         {
           question: "Gambar yang serupa dengan gambar berikut adalah",
-          image: `https://res.cloudinary.com/dtkrxcjrr/image/upload/v1724238630/WhatsApp_Image_2024-08-21_at_18.07.59_7eb31ffe_lg1uiw.jpg`,
+          image: `https://res.cloudinary.com/dtkrxcjrr/image/upload/v1724380419/tumbuhan.jpg`,
           point: 99999999,
           categoryId: 1,
           createdAt: new Date(),
@@ -280,7 +280,7 @@ module.exports = {
       "MultipleChoices",
       [
         {
-          image: `https://res.cloudinary.com/dtkrxcjrr/image/upload/v1724238630/WhatsApp_Image_2024-08-21_at_18.07.59_7eb31ffe_lg1uiw.jpg`,
+          image: `https://res.cloudinary.com/dtkrxcjrr/image/upload/v1724380419/tumbuhan.jpg`,
           description: "Terdetiksi makhluk prasejarah",
           questionId: questionId[0].id,
           createdAt: new Date(),

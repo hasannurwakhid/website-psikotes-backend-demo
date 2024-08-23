@@ -51,6 +51,18 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: true,
       },
+      startTime: {
+        allowNull: true,
+        type: Sequelize.DATE,
+      },
+      endTime: {
+        allowNull: true,
+        type: Sequelize.DATE,
+      },
+      timeToEnd: {
+        allowNull: true,
+        type: Sequelize.DATE,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

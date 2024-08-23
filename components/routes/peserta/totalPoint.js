@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const {
-  calculateTotalPoint,
+  manualSubmit,
   getAveragePesertaPoints,
 } = require("../../controllers/totalPoint");
 const { authMiddleware } = require("../../../src/middleware/auth");
 
-router.get("/calculatePoint", authMiddleware(["peserta"]), calculateTotalPoint);
+router.get("/", authMiddleware(["peserta"]), manualSubmit);
 
 // router.get(
 //   "/average",

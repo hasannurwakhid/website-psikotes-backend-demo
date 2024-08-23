@@ -1,5 +1,7 @@
 const { answerQuestion } = require("../services/answerHistory");
 
+const { calculateTotalPoint } = require("../services/totalPoint");
+
 exports.answerQuestion = async (req, res, next) => {
   try {
     const { multipleChoiceId } = req.body;
@@ -11,6 +13,18 @@ exports.answerQuestion = async (req, res, next) => {
         statusCode: 400,
       });
     }
+
+    if (
+      req?.user?.isDone === true ||
+      (req?.user?.timeToEnd && new Date() >= new Date(req?.user?.timeToEnd))
+    ) {
+      const data = await calculateTotalPoint(userId);
+      res.status(200).json({
+        message: "Pengguna sudah mensubmit atau waktu telah habis",
+        data,
+      });
+    }
+
     const data = await answerQuestion({ userId, multipleChoiceId });
     res.status(200).json({
       message: "Success",

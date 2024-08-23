@@ -3,6 +3,7 @@ const { uploader } = require("../../src/helper/cloudinary");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 const path = require("path");
+const { where } = require("sequelize");
 
 exports.getUserByNIK = async (nik) => {
   const data = await User.findOne({ where: { nik } });
@@ -81,4 +82,20 @@ exports.getUsersByRole = async (role) => {
 exports.deleteUserById = async (id) => {
   await User.destroy({ where: { id } });
   return null;
+};
+
+exports.updateUserById = async (id, payload) => {
+  const data = await User.update(payload, {
+    where: { id },
+    returning: true,
+  });
+  return data;
+};
+
+exports.updateExpiredQuizzes = async () => {
+  const now = new Date();
+  await User.update(
+    { isDone: true },
+    { where: { isDone: false, timeToEnd: { [Op.lte]: now } } }
+  );
 };

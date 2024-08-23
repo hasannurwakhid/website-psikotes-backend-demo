@@ -3,12 +3,22 @@ const {
   getAveragePesertaPoints,
 } = require("../services/totalPoint");
 
-exports.calculateTotalPoint = async (req, res, next) => {
+exports.manualSubmit = async (req, res, next) => {
   try {
     const userId = req?.user?.id;
+    let message = "Success";
+
     const data = await calculateTotalPoint(userId);
+
+    if (
+      req?.user?.isDone === true ||
+      (req?.user?.timeToEnd && new Date() >= new Date(req?.user?.timeToEnd))
+    ) {
+      message = "Pengguna sudah mensubmit atau waktu telah habis";
+    }
+
     res.status(200).json({
-      message: "Success",
+      message,
       data,
     });
   } catch (error) {
