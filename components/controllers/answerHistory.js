@@ -6,6 +6,7 @@ exports.answerQuestion = async (req, res, next) => {
   try {
     const { multipleChoiceId } = req.body;
     const userId = req?.user?.id;
+    const startTime = req?.user?.id;
 
     if (multipleChoiceId == "" || !multipleChoiceId) {
       return next({
@@ -18,7 +19,7 @@ exports.answerQuestion = async (req, res, next) => {
       req?.user?.isDone === true ||
       (req?.user?.timeToEnd && new Date() >= new Date(req?.user?.timeToEnd))
     ) {
-      const data = await calculateTotalPoint(userId);
+      const data = await calculateTotalPoint({ startTime, userId });
       res.status(200).json({
         message: "Pengguna sudah mensubmit atau waktu telah habis",
         data,

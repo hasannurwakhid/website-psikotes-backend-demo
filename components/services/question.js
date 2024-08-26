@@ -12,6 +12,8 @@ const { createMultipleChoice } = require("../repositories/multipleChoice");
 
 const { createAnswerKey } = require("../repositories/answerKeys");
 
+const { getQuestionTime } = require("../repositories/questionTime");
+
 exports.getQuestionsByCategory = async (payload) => {
   const data = await getQuestionsByCategory(payload);
 
@@ -21,9 +23,18 @@ exports.getQuestionsByCategory = async (payload) => {
 };
 
 exports.getPesertaQuestions = async (payload) => {
-  const { userId, pointTotal, isDone, startTime } = payload;
-  if (startTime) {
-    await updateUserById();
+  const { userId, pointTotal, isDone, startTime, timeToEnd } = payload;
+  let timeToEndFlex = timeToEnd;
+
+  if (!startTime) {
+    const startTimeDate = new Date();
+    timeToEndFlex = new Date(
+      startTimeDate.getTime() + (await getQuestionTime())
+    );
+    await updateUserById(userId, {
+      startTime: startTimeDate,
+      timeToEnd: timeToEndFlex,
+    });
   }
   if (isDone == true) {
     //return total poin
@@ -31,7 +42,12 @@ exports.getPesertaQuestions = async (payload) => {
   } else {
     const data = await getPesertaQuestions(userId);
     const shuffledData = data.sort(() => Math.random() - 0.5);
-    return shuffledData;
+
+    const remainingTime = timeToEndFlex.getTime() - new Date().getTime();
+
+    const cek2 = remainingTime;
+
+    return { remainingTime, shuffledData };
   }
 };
 

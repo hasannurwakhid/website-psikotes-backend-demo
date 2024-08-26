@@ -5,7 +5,8 @@ const {
   updateUserById,
 } = require("../repositories/auth");
 
-exports.calculateTotalPoint = async (userId) => {
+exports.calculateTotalPoint = async (payload) => {
+  const { startTime, userId } = payload;
   const data = await getAnswerHistoriesByUserId(userId);
   const totalPoints = data.reduce((total, answerHistory) => {
     if (
@@ -18,7 +19,14 @@ exports.calculateTotalPoint = async (userId) => {
     return total;
   }, 0);
 
-  await updateUserById(userId, { isDone: true, pointTotal: totalPoints });
+  const endTime = new Date();
+
+  await updateUserById(userId, {
+    isDone: true,
+    pointTotal: totalPoints,
+    endTime: endTime,
+    totalTime: endTime.getTime() - startTime.getTime(),
+  });
 
   return { pointTotal: totalPoints };
 };

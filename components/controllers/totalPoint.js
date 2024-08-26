@@ -6,9 +6,17 @@ const {
 exports.manualSubmit = async (req, res, next) => {
   try {
     const userId = req?.user?.id;
+    const startTime = req?.user?.startTime;
     let message = "Success";
 
-    const data = await calculateTotalPoint(userId);
+    if (!startTime) {
+      return next({
+        message: "Kamu belum mengerjakan soal",
+        statusCode: 403,
+      });
+    }
+
+    const data = await calculateTotalPoint({ startTime, userId });
 
     if (
       req?.user?.isDone === true ||

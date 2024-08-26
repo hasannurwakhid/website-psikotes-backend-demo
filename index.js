@@ -6,6 +6,9 @@ const express = require("express");
 const router = require("./components/routes");
 const cron = require("node-cron");
 const { updateExpiredQuizzes } = require("./components/repositories/auth");
+const { calculateTotalPoint } = require("./components/services/totalPoint");
+const { User } = require("./models");
+const { Op } = require("sequelize");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -24,9 +27,38 @@ app.use(
   })
 );
 
-cron.schedule("*/1 * * * *", async () => {
-  // await updateExpiredQuizzes();
-  console.log("Checked for expired quizzes and updated isDone status");
+cron.schedule("* * * * * *", async () => {
+  console.log("Cron job triggered");
+  try {
+    const now = new Date();
+    const usersToUpdate = await User.findAll({
+      where: { isDone: false, timeToEnd: { [Op.lte]: now } },
+    });
+
+    if (usersToUpdate.length > 0) {
+      // Update isDone status
+      await User.update(
+        { isDone: true },
+        { where: { isDone: false, timeToEnd: { [Op.lte]: now } } }
+      );
+      console.log(`Updated isDone status for ${usersToUpdate.length} users`);
+
+      // Calculate total point for each user
+      for (const user of usersToUpdate) {
+        const totalPoints = await calculateTotalPoint({
+          userId: user.id,
+          startTime: user.startTime,
+        });
+        console.log(
+          `Calculated total points for user ${user.id}: ${totalPoints}`
+        );
+      }
+    } else {
+      console.log("No expired quizzes found");
+    }
+  } catch (error) {
+    console.error("Error in cron job:", error);
+  }
 });
 
 app.use("/api", router);

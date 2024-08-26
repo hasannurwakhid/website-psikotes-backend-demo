@@ -1,4 +1,3 @@
-const { where } = require("sequelize");
 const { Category } = require("../../models");
 
 exports.getCategories = async () => {
