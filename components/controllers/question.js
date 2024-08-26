@@ -27,6 +27,7 @@ exports.getPesertaQuestions = async (req, res, next) => {
     const isDone = req?.user?.isDone;
     const startTime = req?.user?.startTime;
     const timeToEnd = req?.user?.timeToEnd;
+    const totalTime = req?.user?.totalTime;
 
     const data = await getPesertaQuestions({
       userId,
@@ -34,6 +35,7 @@ exports.getPesertaQuestions = async (req, res, next) => {
       isDone,
       startTime,
       timeToEnd,
+      totalTime,
     });
     res.status(200).json({
       message: "Success",

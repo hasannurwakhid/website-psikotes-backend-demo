@@ -23,7 +23,8 @@ exports.getQuestionsByCategory = async (payload) => {
 };
 
 exports.getPesertaQuestions = async (payload) => {
-  const { userId, pointTotal, isDone, startTime, timeToEnd } = payload;
+  const { userId, pointTotal, isDone, startTime, timeToEnd, totalTime } =
+    payload;
   let timeToEndFlex = timeToEnd;
 
   if (!startTime) {
@@ -38,14 +39,12 @@ exports.getPesertaQuestions = async (payload) => {
   }
   if (isDone == true) {
     //return total poin
-    return { pointTotal };
+    return { pointTotal, totalTime };
   } else {
     const data = await getPesertaQuestions(userId);
     const shuffledData = data.sort(() => Math.random() - 0.5);
 
     const remainingTime = timeToEndFlex.getTime() - new Date().getTime();
-
-    const cek2 = remainingTime;
 
     return { remainingTime, shuffledData };
   }
