@@ -4,6 +4,7 @@ const router = express.Router();
 const authRoutes = require("./auth");
 const categoryRoutes = require("./category");
 const questionRoutes = require("./question");
+const totalPointRoutes = require("./totalPoint");
 
 // const categories = require("../routes/category");
 // const question = require("../routes/question");
@@ -13,6 +14,7 @@ const questionRoutes = require("./question");
 router.use("/auth", authRoutes);
 router.use("/categories", categoryRoutes);
 router.use("/questions", questionRoutes);
+router.use("/totalPoints", totalPointRoutes);
 
 // router.use("/categories", categories);
 // router.use("/questions", question);

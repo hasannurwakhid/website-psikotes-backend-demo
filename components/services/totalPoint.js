@@ -38,5 +38,5 @@ exports.getAveragePesertaPoints = async () => {
     return total + points;
   }, 0);
   const averagePesertaPoints = pesertaPoints / data.length;
-  return { averagePesertaPoints };
+  return averagePesertaPoints;
 };
