@@ -5,7 +5,7 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert("QuestionTimes", [
       {
-        questionTime: 45 * 60 * 1000,
+        questionTime: 6 * 60 * 60 * 1000,
         createdAt: new Date(),
         updatedAt: new Date(),
       },

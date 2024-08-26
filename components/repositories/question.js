@@ -81,6 +81,30 @@ exports.createQuestion = async (payload) => {
   return data;
 };
 
+exports.updateQuestionById = async (id, payload) => {
+  const { image } = payload;
+
+  if (image) {
+    image.publicId = crypto.randomBytes(16).toString("hex");
+
+    image.name = `${image.publicId}${path.parse(image.name).ext}`;
+
+    const imageUpload = await uploader(image);
+    payload.image = imageUpload.secure_url;
+  }
+
+  if (payload?.picture) {
+    payload.image = payload?.picture;
+  }
+
+  const data = await Question.update(payload, {
+    where: { id },
+    returning: true,
+  });
+
+  return data;
+};
+
 exports.getQuestionByIdForAdmin = async (id) => {
   const data = await Question.findOne({
     where: { id },

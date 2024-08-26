@@ -3,6 +3,7 @@ const {
   getQuestionByIdForAdmin,
   getQuestionsByCategory,
   getPesertaQuestions,
+  updateQuestionById,
   deleteQuestionById,
 } = require("../repositories/question");
 
@@ -81,6 +82,16 @@ exports.createQuestion = async (payload) => {
   }
 
   return getQuestionByIdForAdmin(createdQuestion.id);
+};
+
+exports.updateQuestionById = async (id, payload) => {
+  const data = updateQuestionById(id, payload);
+  if (data[0] === 0) {
+    const error = new Error("Data tidak ditemukan")
+    error.statusCode = 404
+    throw error
+  }
+  return data;
 };
 
 exports.deleteQuestionById = async (id) => {
