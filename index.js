@@ -27,7 +27,7 @@ app.use(
   })
 );
 
-cron.schedule("* * * * * *", async () => {
+cron.schedule("* * * * *", async () => {
   console.log("Cron job triggered");
   try {
     const now = new Date();

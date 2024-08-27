@@ -9,7 +9,6 @@ const {
   AnswerHistory,
   AnswerKey,
 } = require("../../models");
-const { where } = require("sequelize");
 
 exports.getQuestionsByCategory = async (payload) => {
   const { categoryId, userId } = payload;
@@ -84,7 +83,15 @@ exports.createQuestion = async (payload) => {
 exports.updateQuestionById = async (id, payload) => {
   const { image } = payload;
 
-  if (image) {
+  const selectedQuestion = await Question.findOne({ where: { id } });
+
+  if (!selectedQuestion) {
+    const error = new Error("Data tidak ditemukan");
+    error.statusCode = 404;
+    throw error;
+  }
+
+  if (image && typeof image == "object") {
     image.publicId = crypto.randomBytes(16).toString("hex");
 
     image.name = `${image.publicId}${path.parse(image.name).ext}`;

@@ -30,3 +30,37 @@ exports.createMultipleChoice = async (payload) => {
   const data = await MultipleChoice.create(payload, { returning: true });
   return data;
 };
+
+exports.updateMultipleChoiceById = async (id, payload) => {
+  const { image } = payload;
+
+  const selectedMultipleChoice = await MultipleChoice.findOne({
+    where: { id },
+  });
+
+  if (!selectedMultipleChoice) {
+    const error = new Error("Data tidak ditemukan");
+    error.statusCode = 404;
+    throw error;
+  }
+
+  if (image && typeof image == "object") {
+    image.publicId = crypto.randomBytes(16).toString("hex");
+
+    image.name = `${image.publicId}${path.parse(image.name).ext}`;
+
+    const imageUpload = await uploader(image);
+    payload.image = imageUpload.secure_url;
+  }
+
+  if (payload?.picture) {
+    payload.image = payload?.picture;
+  }
+
+  const data = await MultipleChoice.update(payload, {
+    where: { id },
+    returning: true,
+  });
+
+  return data;
+};

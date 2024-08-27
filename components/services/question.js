@@ -85,13 +85,8 @@ exports.createQuestion = async (payload) => {
 };
 
 exports.updateQuestionById = async (id, payload) => {
-  const data = updateQuestionById(id, payload);
-  if (data[0] === 0) {
-    const error = new Error("Data tidak ditemukan")
-    error.statusCode = 404
-    throw error
-  }
-  return data;
+  const data = await updateQuestionById(id, payload);
+  return data[1];
 };
 
 exports.deleteQuestionById = async (id) => {

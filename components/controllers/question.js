@@ -2,6 +2,7 @@ const {
   createQuestion,
   getQuestionsByCategory,
   getPesertaQuestions,
+  updateQuestionById,
   deleteQuestionById,
 } = require("../services/question");
 
@@ -101,6 +102,26 @@ exports.createQuestions = async (req, res, next) => {
       correctAnswer: correctAnswerInt,
     });
 
+    res.status(200).json({
+      message: "Success",
+      data,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.updateQuestionById = async (req, res, next) => {
+  try {
+    const { question, point, categoryId } = req.body;
+    const questionId = req?.params?.id;
+    const imageQuestion = req?.files?.imageQuestion;
+    const data = await updateQuestionById(questionId, {
+      question,
+      point,
+      categoryId,
+      image: imageQuestion,
+    });
     res.status(200).json({
       message: "Success",
       data,
