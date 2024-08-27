@@ -63,6 +63,10 @@ module.exports = {
         allowNull: true,
         type: Sequelize.DATE,
       },
+      questionOrder: {
+        allowNull: true,
+        type: Sequelize.TEXT,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

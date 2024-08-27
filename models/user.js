@@ -28,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       startTime: DataTypes.DATE,
       endTime: DataTypes.DATE,
       timeToEnd: DataTypes.DATE,
+      questionOrder: DataTypes.TEXT,
     },
     {
       sequelize,

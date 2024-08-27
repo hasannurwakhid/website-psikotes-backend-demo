@@ -3,6 +3,7 @@ const {
   getQuestionByIdForAdmin,
   getQuestionsByCategory,
   getPesertaQuestions,
+  getAllQuestionId,
   updateQuestionById,
   deleteQuestionById,
 } = require("../repositories/question");
@@ -26,6 +27,8 @@ exports.getQuestionsByCategory = async (payload) => {
 exports.getPesertaQuestions = async (payload) => {
   const { userId, pointTotal, isDone, startTime, timeToEnd, totalTime } =
     payload;
+
+  let questionOrder = payload?.questionOrder;
   let timeToEndFlex = timeToEnd;
 
   if (!startTime) {
@@ -33,21 +36,33 @@ exports.getPesertaQuestions = async (payload) => {
     timeToEndFlex = new Date(
       startTimeDate.getTime() + (await getQuestionTime())
     );
+
+    // Generate shuffled question order on first attempt
+    const questions = await getAllQuestionId();
+    questionOrder = questions.map((q) => q.id).sort(() => Math.random() - 0.5);
+
     await updateUserById(userId, {
       startTime: startTimeDate,
       timeToEnd: timeToEndFlex,
+      questionOrder: JSON.stringify(questionOrder),
     });
   }
   if (isDone == true) {
     //return total poin
     return { pointTotal, totalTime };
   } else {
-    const data = await getPesertaQuestions(userId);
-    const shuffledData = data.sort(() => Math.random() - 0.5);
+    if (typeof questionOrder === "string") {
+      questionOrder = JSON.parse(questionOrder);
+    }
+    const pesertaQuestions = await getPesertaQuestions(userId);
+    // const shuffledData = data.sort(() => Math.random() - 0.5);
+    const orderedPesertaQuestions = questionOrder.map((id) =>
+      pesertaQuestions.find((question) => question.id === id)
+    );
 
     const remainingTime = timeToEndFlex.getTime() - new Date().getTime();
 
-    return { remainingTime, shuffledData };
+    return { remainingTime, shuffledData: orderedPesertaQuestions };
   }
 };
 

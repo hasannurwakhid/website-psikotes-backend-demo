@@ -57,6 +57,13 @@ exports.getPesertaQuestions = async (userId) => {
   return data;
 };
 
+exports.getAllQuestionId = async () => {
+  const data = await Question.findAll({
+    attributes: ["id"],
+  });
+  return data;
+};
+
 exports.createQuestion = async (payload) => {
   const { image } = payload;
 
