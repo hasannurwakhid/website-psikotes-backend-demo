@@ -6,7 +6,7 @@ exports.answerQuestion = async (req, res, next) => {
   try {
     const { multipleChoiceId } = req.body;
     const userId = req?.user?.id;
-    const startTime = req?.user?.id;
+    const startTime = req?.user?.startTime;
 
     if (multipleChoiceId == "" || !multipleChoiceId) {
       return next({
