@@ -2,6 +2,7 @@ const { getAnswerHistoriesByUserId } = require("../repositories/answerHistory");
 const {
   getUsers,
   getUsersByRole,
+  getUsersByRoleAndIsDone,
   updateUserById,
 } = require("../repositories/auth");
 
@@ -32,7 +33,7 @@ exports.calculateTotalPoint = async (payload) => {
 };
 
 exports.getAveragePesertaPoints = async () => {
-  const data = await getUsersByRole("peserta");
+  const data = await getUsersByRoleAndIsDone("peserta");
   const pesertaPoints = data.reduce((total, user) => {
     const points = user.pointTotal;
     return total + points;

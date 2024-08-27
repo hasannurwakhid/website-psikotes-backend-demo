@@ -79,6 +79,11 @@ exports.getUsersByRole = async (role) => {
   return data;
 };
 
+exports.getUsersByRoleAndIsDone = async (role) => {
+  const data = await User.findAll({ where: { isDone: true, role } });
+  return data;
+};
+
 exports.deleteUserById = async (id) => {
   await User.destroy({ where: { id } });
   return null;
