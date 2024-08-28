@@ -4,6 +4,9 @@ const {
   createAnswerHistory,
   updateAnswerHistory,
 } = require("../repositories/answerHistory");
+const {
+  getQuestionByIdForResponAnswerQuestion,
+} = require("../repositories/question");
 
 const { getMultipleChoiceById } = require("../repositories/multipleChoice");
 
@@ -23,5 +26,5 @@ exports.answerQuestion = async (payload) => {
     await createAnswerHistory({ userId, multipleChoiceId });
   }
 
-  return null;
+  return await getQuestionByIdForResponAnswerQuestion(questionId, userId);
 };

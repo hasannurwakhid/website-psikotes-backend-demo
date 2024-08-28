@@ -148,3 +148,27 @@ exports.deleteQuestionById = async (id) => {
   });
   return data;
 };
+
+exports.getQuestionByIdForResponAnswerQuestion = async (id, userId) => {
+  const data = await Question.findOne({
+    where: {
+      id,
+    },
+    include: [
+      {
+        model: Category,
+      },
+      {
+        model: MultipleChoice,
+        include: [
+          {
+            model: AnswerHistory,
+            where: { userId },
+            required: false,
+          },
+        ],
+      },
+    ],
+  });
+  return data;
+};

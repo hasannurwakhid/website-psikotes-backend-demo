@@ -60,7 +60,11 @@ exports.getPesertaQuestions = async (payload) => {
       pesertaQuestions.find((question) => question.id === id)
     );
 
-    const remainingTime = timeToEndFlex.getTime() - new Date().getTime();
+    let remainingTime = timeToEndFlex.getTime() - new Date().getTime();
+
+    if (remainingTime < 0) {
+      remainingTime = 0;
+    }
 
     return { remainingTime, shuffledData: orderedPesertaQuestions };
   }
