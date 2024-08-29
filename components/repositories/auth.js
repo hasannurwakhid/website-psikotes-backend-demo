@@ -45,7 +45,9 @@ exports.getUserByID = async (id) => {
 };
 
 exports.updateUserById = async (id, payload) => {
-  payload.password = bcrypt.hashSync(payload.password, 10);
+  if (payload?.password) {
+    payload.password = bcrypt.hashSync(payload.password, 10);
+  }
   const selectedUser = await User.findOne({ where: { id } });
   const { image } = payload;
   if (selectedUser) {
@@ -57,12 +59,12 @@ exports.updateUserById = async (id, payload) => {
       const imageUpload = await uploader(image);
       payload.image = imageUpload.secure_url;
     }
-    await User.update(payload, {
+    const data = await User.update(payload, {
       where: {
         id,
       },
+      returning: true,
     });
-    const data = await User.findOne({ where: { id } });
     return data;
   } else {
     throw new Error(`not found!`);
@@ -87,14 +89,6 @@ exports.getUsersByRoleAndIsDone = async (role) => {
 exports.deleteUserById = async (id) => {
   await User.destroy({ where: { id } });
   return null;
-};
-
-exports.updateUserById = async (id, payload) => {
-  const data = await User.update(payload, {
-    where: { id },
-    returning: true,
-  });
-  return data;
 };
 
 exports.updateExpiredQuizzes = async () => {

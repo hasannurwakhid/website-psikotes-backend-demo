@@ -149,13 +149,27 @@ exports.profile = async (id) => {
 };
 
 exports.getUsersByRole = async (role) => {
-  const data = await getUsersByRole(role);
-  return data;
+  const users = await getUsersByRole(role);
+
+  const sanitizedUsers = users.map((user) => {
+    const userObj = user.toJSON(); // Mengubah instance Sequelize menjadi plain object
+    delete userObj.password; // Menghapus field password
+    return userObj;
+  });
+
+  return sanitizedUsers;
 };
 
 exports.updateUserById = async (id, payload) => {
-  const data = await updateUserById(id, payload);
-  return data;
+  const users = await updateUserById(id, payload);
+
+  const sanitizedUsers = users[1].map((user) => {
+    const userObj = user.toJSON(); // Mengubah instance Sequelize menjadi plain object
+    delete userObj.password; // Menghapus field password
+    return userObj;
+  });
+
+  return sanitizedUsers;
 };
 
 exports.deleteUserById = async (id) => {
