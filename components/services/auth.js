@@ -15,7 +15,9 @@ exports.register = async (payload) => {
   const existingUser = await getUserByNIK(payload.nik);
 
   if (existingUser) {
-    throw new Error("NIK sudah terdaftar");
+    const error = new Error("NIK sudah terdaftar");
+    error.statusCode = 409;
+    throw error;
   }
 
   let user = await createUser(payload);
@@ -68,12 +70,16 @@ exports.adminRegister = async (payload) => {
 exports.loginPeserta = async (payload) => {
   let user = await getUserByNIK(payload.nik);
   if (!user) {
-    throw new Error(`NIK belum terdaftar`);
+    const error = new Error(`NIK belum terdaftar`);
+    error.statusCode = 401;
+    throw error;
   }
 
   const isValid = await bcrypt.compare(payload.password, user?.password);
   if (!isValid) {
-    throw new Error(`Password salah`);
+    const error = new Error(`NIK atau Password salah`);
+    error.statusCode = 401;
+    throw error;
   }
 
   if (user?.dataValues?.password) {
@@ -101,12 +107,16 @@ exports.loginPeserta = async (payload) => {
 exports.loginAdmin = async (payload) => {
   let user = await getUserByNIP(payload.nip);
   if (!user) {
-    throw new Error(`NIP belum terdaftar`);
+    const error = new Error(`NIP belum terdaftar`);
+    error.statusCode = 401;
+    throw error;
   }
 
   const isValid = await bcrypt.compare(payload.password, user?.password);
   if (!isValid) {
-    throw new Error(`Password salah`);
+    const error = new Error(`NIP atau Password salah`);
+    error.statusCode = 401;
+    throw error;
   }
 
   if (user?.dataValues?.password) {
