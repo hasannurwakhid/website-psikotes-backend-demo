@@ -140,7 +140,7 @@ module.exports = {
         {
           question: "Berikut ini yang termasuk tumbuhan adalah?",
           image: null,
-          point: 99999999,
+          point: 10,
           categoryId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -268,7 +268,7 @@ module.exports = {
         {
           question: "Gambar yang serupa dengan gambar berikut adalah",
           image: `https://res.cloudinary.com/dtkrxcjrr/image/upload/v1724380419/tumbuhan.jpg`,
-          point: 99999999,
+          point: 10,
           categoryId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
