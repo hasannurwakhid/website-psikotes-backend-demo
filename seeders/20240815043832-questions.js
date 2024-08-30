@@ -330,7 +330,7 @@ module.exports = {
       "Questions",
       [
         {
-          question: "Soal no 6",
+          question: "MANDIRI >< ...",
           image: null,
           point: 10,
           categoryId: 1,
@@ -345,35 +345,35 @@ module.exports = {
       [
         {
           image: null,
-          description: "jawaban a",
+          description: "Intimasi",
           questionId: questionId[0].id,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           image: null,
-          description: "jawaban b",
+          description: "Interaksi",
           questionId: questionId[0].id,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           image: null,
-          description: "jawaban c",
+          description: "Korelasi",
           questionId: questionId[0].id,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           image: null,
-          description: "jawaban d",
+          description: "Dependen",
           questionId: questionId[0].id,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           image: null,
-          description: "jawaban e",
+          description: "Invalid",
           questionId: questionId[0].id,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -383,7 +383,7 @@ module.exports = {
     );
     await queryInterface.bulkInsert("AnswerKeys", [
       {
-        multipleChoiceId: multipleChoiceIdForAnswerKey[2].id,
+        multipleChoiceId: multipleChoiceIdForAnswerKey[3].id,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -394,7 +394,7 @@ module.exports = {
       "Questions",
       [
         {
-          question: "Soal no 7",
+          question: `Jika 15 kaleng makanan diperlukan 7 orang selama 2 hari maka untuk memenuhi kebutuhan 4 orang selama 7 hari diperlukan makanan sebanyak..`,
           image: null,
           point: 10,
           categoryId: 1,
@@ -409,35 +409,35 @@ module.exports = {
       [
         {
           image: null,
-          description: "jawaban a",
+          description: `14 kaleng`,
           questionId: questionId[0].id,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           image: null,
-          description: "jawaban b",
+          description: `15 kaleng`,
           questionId: questionId[0].id,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           image: null,
-          description: "jawaban c",
+          description: `24 kaleng`,
           questionId: questionId[0].id,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           image: null,
-          description: "jawaban d",
+          description: `28 kaleng`,
           questionId: questionId[0].id,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           image: null,
-          description: "jawaban e",
+          description: `30 kaleng`,
           questionId: questionId[0].id,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -447,7 +447,7 @@ module.exports = {
     );
     await queryInterface.bulkInsert("AnswerKeys", [
       {
-        multipleChoiceId: multipleChoiceIdForAnswerKey[2].id,
+        multipleChoiceId: multipleChoiceIdForAnswerKey[4].id,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -458,7 +458,7 @@ module.exports = {
       "Questions",
       [
         {
-          question: "Soal no 8",
+          question: `Mesin Jahit : ..... = ..... : Benang`,
           image: null,
           point: 10,
           categoryId: 1,
@@ -473,35 +473,35 @@ module.exports = {
       [
         {
           image: null,
-          description: "jawaban a",
+          description: `Pola - Kapas`,
           questionId: questionId[0].id,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           image: null,
-          description: "jawaban b",
+          description: `Perancang - Sutra`,
           questionId: questionId[0].id,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           image: null,
-          description: "jawaban c",
+          description: `Penjahit - Bordir`,
           questionId: questionId[0].id,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           image: null,
-          description: "jawaban d",
+          description: `Jarum - Kain`,
           questionId: questionId[0].id,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           image: null,
-          description: "jawaban e",
+          description: `Pakaian - Mesin Pintal`,
           questionId: questionId[0].id,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -511,7 +511,7 @@ module.exports = {
     );
     await queryInterface.bulkInsert("AnswerKeys", [
       {
-        multipleChoiceId: multipleChoiceIdForAnswerKey[2].id,
+        multipleChoiceId: multipleChoiceIdForAnswerKey[4].id,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
