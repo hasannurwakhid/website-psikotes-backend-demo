@@ -193,6 +193,19 @@ exports.profile = async (req, res, next) => {
   }
 };
 
+exports.checkIsDone = async (req, res, next) => {
+  try {
+    const data = req?.user?.isDone;
+
+    res.status(200).json({
+      message: "Success",
+      data,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 exports.updateAdminAccoundtById = async (req, res, next) => {
   try {
     const { nip, name, email, phoneNumber, password } = req.body;
