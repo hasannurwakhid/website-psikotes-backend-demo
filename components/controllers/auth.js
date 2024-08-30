@@ -252,12 +252,6 @@ exports.updateAdminAccoundtById = async (req, res, next) => {
         statusCode: 400,
       });
     }
-    if (password == "" || !password) {
-      return next({
-        message: "Password harus diisi!",
-        statusCode: 400,
-      });
-    }
 
     const data = await updateUserById(id, {
       nip,
