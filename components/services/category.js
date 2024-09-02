@@ -7,7 +7,17 @@ const {
 } = require("../repositories/category");
 
 exports.getCategories = async () => {
-  const data = await getCategories();
+  const categories = await getCategories();
+  const data = categories.map((category) => {
+    const questionCount = category.Questions.length;
+
+    const { Questions, ...categoryWithoutQuestions } = category.toJSON();
+
+    return {
+      ...categoryWithoutQuestions,
+      questionCount,
+    };
+  });
   return data;
 };
 

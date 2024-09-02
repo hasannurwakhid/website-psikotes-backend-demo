@@ -1,7 +1,13 @@
-const { Category } = require("../../models");
+const { Category, Question } = require("../../models");
 
 exports.getCategories = async () => {
-  const data = await Category.findAll();
+  const data = await Category.findAll({
+    include: [
+      {
+        model: Question,
+      },
+    ],
+  });
   return data;
 };
 
