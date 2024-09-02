@@ -11,21 +11,13 @@ const {
 } = require("../../models");
 
 exports.getQuestionsByCategory = async (payload) => {
-  const { categoryId, userId } = payload;
+  const { categoryId } = payload;
   const data = await Question.findAll({
     where: { categoryId },
     include: [
       {
-        model: Category,
-      },
-      {
         model: MultipleChoice,
         include: [
-          {
-            model: AnswerHistory,
-            where: { userId },
-            required: false,
-          },
           {
             model: AnswerKey,
           },

@@ -9,9 +9,8 @@ const {
 exports.getQuestionsByCategory = async (req, res, next) => {
   try {
     const { categoryId } = req.body;
-    const userId = req?.user?.id;
 
-    const data = await getQuestionsByCategory({ categoryId, userId });
+    const data = await getQuestionsByCategory({ categoryId });
     res.status(200).json({
       message: "Success",
       data,

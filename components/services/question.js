@@ -18,10 +18,7 @@ const { getQuestionTime } = require("../repositories/questionTime");
 
 exports.getQuestionsByCategory = async (payload) => {
   const data = await getQuestionsByCategory(payload);
-
-  const shuffledData = data.sort(() => Math.random() - 0.5);
-
-  return shuffledData;
+  return data;
 };
 
 exports.getPesertaQuestions = async (payload) => {
