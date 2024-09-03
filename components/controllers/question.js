@@ -10,6 +10,13 @@ exports.getQuestionsByCategory = async (req, res, next) => {
   try {
     const { categoryId } = req.body;
 
+    if (!categoryId || categoryId == "") {
+      return next({
+        message: "categoryId harus diisi!",
+        statusCode: 400,
+      });
+    }
+
     const data = await getQuestionsByCategory({ categoryId });
     res.status(200).json({
       message: "Success",
@@ -62,12 +69,86 @@ exports.createQuestions = async (req, res, next) => {
       correctAnswer,
     } = req.body;
 
+    if (!point || !Number.isInteger(point)) {
+      return next({
+        message: "Poin harus diisi dan bernilai integer yang valid",
+        statusCode: 400,
+      });
+    }
+
+    if (!categoryId || !Number.isInteger(categoryId)) {
+      return next({
+        message: "categoryId harus diisi dan bernilai integer yang valid",
+        statusCode: 400,
+      });
+    }
+
+    if (
+      !correctAnswer ||
+      !Number.isInteger(correctAnswer) ||
+      correctAnswer < 1 ||
+      correctAnswer > 5
+    ) {
+      return next({
+        message:
+          "Poin harus diisi berupa integer dan nilainya antara 1 sampai 5",
+        statusCode: 400,
+      });
+    }
+
     const imageQuestion = req?.files?.imageQuestion;
     const multipleChoiceImg1 = req?.files?.multipleChoiceImg1;
     const multipleChoiceImg2 = req?.files?.multipleChoiceImg2;
     const multipleChoiceImg3 = req?.files?.multipleChoiceImg3;
     const multipleChoiceImg4 = req?.files?.multipleChoiceImg4;
     const multipleChoiceImg5 = req?.files?.multipleChoiceImg5;
+
+    if (!question && !imageQuestion) {
+      return next({
+        message: "question atau imageQuestion harus diisi salah satu",
+        statusCode: 400,
+      });
+    }
+
+    if (!multipleChoice1 && !multipleChoiceImg1) {
+      return next({
+        message:
+          "multipleChoice1 atau multipleChoiceImg1 harus diisi salah satu",
+        statusCode: 400,
+      });
+    }
+
+    if (!multipleChoice2 && !multipleChoiceImg2) {
+      return next({
+        message:
+          "multipleChoice2 atau multipleChoiceImg2 harus diisi salah satu",
+        statusCode: 400,
+      });
+    }
+
+    if (!multipleChoice3 && !multipleChoiceImg3) {
+      return next({
+        message:
+          "multipleChoice3 atau multipleChoiceImg3 harus diisi salah satu",
+        statusCode: 400,
+      });
+    }
+
+    if (!multipleChoice4 && !multipleChoiceImg4) {
+      return next({
+        message:
+          "multipleChoice4 atau multipleChoiceImg4 harus diisi salah satu",
+        statusCode: 400,
+      });
+    }
+
+    if (!multipleChoice5 && !multipleChoiceImg5) {
+      return next({
+        message:
+          "multipleChoice5 atau multipleChoiceImg5 harus diisi salah satu",
+        statusCode: 400,
+      });
+    }
 
     const multipleChoices = [
       {
@@ -117,6 +198,28 @@ exports.updateQuestionById = async (req, res, next) => {
     const { question, point, categoryId } = req.body;
     const questionId = req?.params?.id;
     const imageQuestion = req?.files?.imageQuestion;
+
+    if (!question && !imageQuestion) {
+      return next({
+        message: "question atau imageQuestion harus diisi salah satu",
+        statusCode: 400,
+      });
+    }
+
+    if (!point || !Number.isInteger(point)) {
+      return next({
+        message: "Poin harus diisi dan bernilai integer yang valid",
+        statusCode: 400,
+      });
+    }
+
+    if (!categoryId || !Number.isInteger(categoryId)) {
+      return next({
+        message: "categoryId harus diisi dan bernilai integer yang valid",
+        statusCode: 400,
+      });
+    }
+
     const data = await updateQuestionById(questionId, {
       question,
       point,
