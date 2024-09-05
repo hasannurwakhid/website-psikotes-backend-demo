@@ -44,6 +44,15 @@ exports.updateCategory = async (req, res, next) => {
     const { category } = req.body;
     const id = req?.params?.id;
 
+    const idInt = parseInt(id, 10);
+
+    if (!idInt || isNaN(idInt)) {
+      return next({
+        message: "id harus diisi dan bernilai integer yang valid",
+        statusCode: 400,
+      });
+    }
+
     if (!category || category.trim() === "") {
       return next({
         message: "Category harus diisi!",
@@ -65,6 +74,15 @@ exports.updateCategory = async (req, res, next) => {
 exports.deleteCategory = async (req, res, next) => {
   try {
     const id = req?.params?.id;
+
+    const idInt = parseInt(id, 10);
+
+    if (!idInt || isNaN(idInt)) {
+      return next({
+        message: "id harus diisi dan bernilai integer yang valid",
+        statusCode: 400,
+      });
+    }
 
     const data = await deleteCategory(id);
 

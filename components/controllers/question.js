@@ -10,6 +10,15 @@ exports.getQuestionsByCategory = async (req, res, next) => {
   try {
     const { categoryId } = req.body;
 
+    const categoryIdInt = parseInt(categoryId, 10);
+
+    if (!categoryIdInt || isNaN(categoryIdInt)) {
+      return next({
+        message: "id harus diisi dan bernilai integer yang valid",
+        statusCode: 400,
+      });
+    }
+
     if (!categoryId || categoryId.trim() === "") {
       return next({
         message: "categoryId harus diisi!",
@@ -280,6 +289,10 @@ exports.updateQuestionById = async (req, res, next) => {
     const questionId = req?.params?.id;
     const imageQuestion = req?.files?.imageQuestion;
 
+    const pointInt = parseInt(point, 10);
+    const categoryIdInt = parseInt(categoryId, 10);
+    const questionIdInt = parseInt(questionId, 10);
+
     if ((!question || question.trim() === "") && !imageQuestion) {
       return next({
         message: "question atau imageQuestion harus diisi salah satu",
@@ -295,16 +308,23 @@ exports.updateQuestionById = async (req, res, next) => {
       });
     }
 
-    if (!point || !Number.isInteger(point)) {
+    if (!pointInt || isNaN(pointInt)) {
       return next({
-        message: "Poin harus diisi dan bernilai integer yang valid",
+        message: "point harus diisi dan bernilai integer yang valid",
         statusCode: 400,
       });
     }
 
-    if (!categoryId || !Number.isInteger(categoryId)) {
+    if (!categoryIdInt || isNaN(categoryIdInt)) {
       return next({
         message: "categoryId harus diisi dan bernilai integer yang valid",
+        statusCode: 400,
+      });
+    }
+
+    if (!questionIdInt || isNaN(questionIdInt)) {
+      return next({
+        message: "questionId harus diisi dan bernilai integer yang valid",
         statusCode: 400,
       });
     }
@@ -328,9 +348,11 @@ exports.deleteQuestionById = async (req, res, next) => {
   try {
     const id = req?.params?.id;
 
-    if (!id || id.trim() === "") {
+    const idInt = parseInt(id, 10);
+
+    if (!idInt || isNaN(idInt)) {
       return next({
-        message: "Id dari question harus diisi",
+        message: "id harus diisi dan bernilai integer yang valid",
         statusCode: 400,
       });
     }

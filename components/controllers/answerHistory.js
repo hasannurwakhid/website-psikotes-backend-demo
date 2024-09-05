@@ -8,9 +8,18 @@ exports.answerQuestion = async (req, res, next) => {
     const userId = req?.user?.id;
     const startTime = req?.user?.startTime;
 
+    const multipleChoiceIdInt = parseInt(multipleChoiceId, 10);
+
     if (!multipleChoiceId || multipleChoiceId.trim() === "") {
       return next({
         message: "multipleChoiceId harus diisi!",
+        statusCode: 400,
+      });
+    }
+
+    if (!multipleChoiceIdInt || isNaN(multipleChoiceIdInt)) {
+      return next({
+        message: "multipleChoiceId harus diisi dan bernilai integer yang valid",
         statusCode: 400,
       });
     }

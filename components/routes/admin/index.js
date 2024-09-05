@@ -6,6 +6,8 @@ const categoryRoutes = require("./category");
 const questionRoutes = require("./question");
 const totalPointRoutes = require("./totalPoint");
 const questionTimeRoutes = require("./questionTime");
+const answerKeyRoutes = require("./answerKey");
+
 
 // const categories = require("../routes/category");
 // const question = require("../routes/question");
@@ -17,6 +19,9 @@ router.use("/categories", categoryRoutes);
 router.use("/questions", questionRoutes);
 router.use("/totalPoints", totalPointRoutes);
 router.use("/questionTimes", questionTimeRoutes);
+router.use("/answerKeys", answerKeyRoutes);
+
+
 
 // router.use("/categories", categories);
 // router.use("/questions", question);

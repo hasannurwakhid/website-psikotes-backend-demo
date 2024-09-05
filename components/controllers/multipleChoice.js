@@ -14,6 +14,15 @@ exports.updateMultipleChoiceById = async (req, res, next) => {
     const imageMultipleChoice = req?.files?.imageMultipleChoice;
     const multipleChoiceId = req?.params?.id;
 
+    const multipleChoiceIdInt = parseInt(multipleChoiceId, 10);
+
+    if (!multipleChoiceIdInt || isNaN(multipleChoiceIdInt)) {
+      return next({
+        message: "multipleChoiceId harus diisi dan bernilai integer yang valid",
+        statusCode: 400,
+      });
+    }
+
     if ((!description || description.trim() === "") && !imageMultipleChoice) {
       return next({
         message: "Description atau imageMultipleChoice harus diisi salah satu",

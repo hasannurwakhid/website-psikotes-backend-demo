@@ -18,12 +18,16 @@ exports.getQuestionTime = async (req, res, next) => {
 exports.updateQuestionTime = async (req, res, next) => {
   try {
     const { questionTime } = req.body;
-    if (!questionTime || questionTime.trim() === "") {
+
+    const questionTimeInt = parseInt(questionTime, 10);
+
+    if (!questionTimeInt || isNaN(questionTimeInt)) {
       return next({
-        message: "questionTime harus diisi",
+        message: "questionTime harus diisi dan bernilai integer yang valid",
         statusCode: 400,
       });
     }
+
     const data = await updateQuestionTime({ questionTime });
     res.status(200).json({
       message: "Success",

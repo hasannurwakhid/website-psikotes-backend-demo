@@ -246,7 +246,7 @@ exports.loginAdmin = async (req, res, next) => {
 exports.profile = async (req, res, next) => {
   try {
     // get user by id
-    const data = req.user;
+    const data = req?.user;
 
     res.status(200).json({
       message: "Success",
@@ -275,6 +275,16 @@ exports.updateAdminAccoundtById = async (req, res, next) => {
     const { nip, name, email, phoneNumber, password } = req.body;
 
     const id = req?.params?.id;
+
+    const idInt = parseInt(id, 10);
+
+    if (!idInt || isNaN(idInt)) {
+      return next({
+        message: "id harus diisi dan bernilai integer yang valid",
+        statusCode: 400,
+      });
+    }
+
     const selectedAdmin = await profile(id);
 
     if (selectedAdmin.role !== "admin") {
@@ -403,6 +413,15 @@ exports.deletePesertaById = async (req, res, next) => {
   try {
     const { id } = req.params;
 
+    const idInt = parseInt(id, 10);
+
+    if (!idInt || isNaN(idInt)) {
+      return next({
+        message: "id harus diisi dan bernilai integer yang valid",
+        statusCode: 400,
+      });
+    }
+
     const peserta = await profile(id);
 
     if (peserta.role !== "peserta") {
@@ -424,6 +443,15 @@ exports.deletePesertaById = async (req, res, next) => {
 exports.deleteAdminById = async (req, res, next) => {
   try {
     const { id } = req.params;
+
+    const idInt = parseInt(id, 10);
+
+    if (!idInt || isNaN(idInt)) {
+      return next({
+        message: "id harus diisi dan bernilai integer yang valid",
+        statusCode: 400,
+      });
+    }
 
     const peserta = await profile(id);
 
