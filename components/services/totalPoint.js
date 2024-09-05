@@ -34,10 +34,11 @@ exports.calculateTotalPoint = async (payload) => {
 
 exports.getAveragePesertaPoints = async () => {
   const data = await getUsersByRoleAndIsDone("peserta");
+  const doneCount = data.length;
   const pesertaPoints = data.reduce((total, user) => {
     const points = user.pointTotal;
     return total + points;
   }, 0);
   const averagePesertaPoints = pesertaPoints / data.length;
-  return averagePesertaPoints;
+  return { averagePesertaPoints, doneCount };
 };
