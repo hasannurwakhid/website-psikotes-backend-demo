@@ -9,6 +9,21 @@ const {
   updateUserById,
 } = require("../services/auth");
 
+const dns = require("dns");
+
+const verifyDomain = (domain) => {
+  return new Promise((resolve, reject) => {
+    dns.resolveMx(domain, (error, addresses) => {
+      if (error || addresses.length === 0) {
+        return reject(
+          new Error("Domain tidak valid atau tidak memiliki catatan MX")
+        );
+      }
+      resolve(true);
+    });
+  });
+};
+
 exports.registerPeserta = async (req, res, next) => {
   try {
     const { nik, name, email, phoneNumber, password } = req.body;
@@ -58,6 +73,17 @@ exports.registerPeserta = async (req, res, next) => {
         statusCode: 400,
       });
     }
+
+    const emailDomain = email.split("@")[1];
+    try {
+      await verifyDomain(emailDomain);
+    } catch (error) {
+      return next({
+        message: error.message,
+        statusCode: 400,
+      });
+    }
+
     if (!phoneNumber || phoneNumber.trim() === "") {
       return next({
         message: "Phone Number harus diisi!",
@@ -142,6 +168,17 @@ exports.adminRegister = async (req, res, next) => {
         statusCode: 400,
       });
     }
+
+    const emailDomain = email.split("@")[1];
+    try {
+      await verifyDomain(emailDomain);
+    } catch (error) {
+      return next({
+        message: error.message,
+        statusCode: 400,
+      });
+    }
+
     if (!phoneNumber || phoneNumber.trim() === "") {
       return next({
         message: "Phone Number harus diisi!",
@@ -333,6 +370,17 @@ exports.updateAdminAccoundtById = async (req, res, next) => {
         statusCode: 400,
       });
     }
+
+    const emailDomain = email.split("@")[1];
+    try {
+      await verifyDomain(emailDomain);
+    } catch (error) {
+      return next({
+        message: error.message,
+        statusCode: 400,
+      });
+    }
+
     if (!phoneNumber || phoneNumber.trim() === "") {
       return next({
         message: "Phone Number harus diisi!",
