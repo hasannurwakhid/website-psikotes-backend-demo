@@ -4,6 +4,7 @@ const {
   loginPeserta,
   loginAdmin,
   getUsersByRole,
+  getAllPeserta,
   deleteUserById,
   profile,
   updateUserById,
@@ -435,7 +436,7 @@ exports.updateAdminAccoundtById = async (req, res, next) => {
 
 exports.getAllPeserta = async (req, res, next) => {
   try {
-    const data = await getUsersByRole("peserta");
+    const data = await getAllPeserta("peserta");
     res.status(200).json({
       message: "Success",
       data,

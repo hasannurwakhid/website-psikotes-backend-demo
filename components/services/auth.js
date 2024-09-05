@@ -170,6 +170,38 @@ exports.getUsersByRole = async (role) => {
   return sanitizedUsers;
 };
 
+exports.getAllPeserta = async (role) => {
+  const users = await getUsersByRole(role);
+
+  const sanitizedUsers = users.map((user) => {
+    const userObj = user.toJSON(); // Mengubah instance Sequelize menjadi plain object
+    delete userObj.password; // Menghapus field password
+
+    if (userObj.isDone == true) {
+      userObj.statusPengerjaan = "Sudah dikerjakan";
+    }
+    if (
+      userObj.startTime == null &&
+      userObj.endTime == null &&
+      userObj.timeToEnd == null
+    ) {
+      userObj.statusPengerjaan = "Belum dikerjakan";
+    }
+
+    if (
+      userObj.startTime != null &&
+      userObj.endTime == null &&
+      userObj.timeToEnd != null
+    ) {
+      userObj.statusPengerjaan = "Sedang dikerjakan";
+    }
+
+    return userObj;
+  });
+
+  return sanitizedUsers;
+};
+
 exports.updateUserById = async (id, payload) => {
   const users = await updateUserById(id, payload);
 
