@@ -8,7 +8,7 @@ exports.answerQuestion = async (req, res, next) => {
     const userId = req?.user?.id;
     const startTime = req?.user?.startTime;
 
-    if (multipleChoiceId == "" || !multipleChoiceId) {
+    if (!multipleChoiceId || multipleChoiceId.trim() === "") {
       return next({
         message: "multipleChoiceId harus diisi!",
         statusCode: 400,

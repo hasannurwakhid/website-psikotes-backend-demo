@@ -21,7 +21,7 @@ exports.createCategory = async (req, res, next) => {
   try {
     const { category } = req.body;
 
-    if (category == "" || !category) {
+    if (!category || category.trim() === "") {
       return next({
         message: "Category harus diisi!",
         statusCode: 400,
@@ -44,7 +44,7 @@ exports.updateCategory = async (req, res, next) => {
     const { category } = req.body;
     const id = req?.params?.id;
 
-    if (category == "" || !category) {
+    if (!category || category.trim() === "") {
       return next({
         message: "Category harus diisi!",
         statusCode: 400,

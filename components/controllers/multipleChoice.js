@@ -2,13 +2,29 @@ const { updateMultipleChoiceById } = require("../services/multipleChoice");
 
 exports.updateMultipleChoiceById = async (req, res, next) => {
   try {
+    const validateImage = (image) => {
+      const validTypes = ["image/jpeg", "image/png"];
+      if (image && !validTypes.includes(image.mimetype)) {
+        return false;
+      }
+      return true;
+    };
+
     const { description } = req.body;
     const imageMultipleChoice = req?.files?.imageMultipleChoice;
     const multipleChoiceId = req?.params?.id;
 
-    if (!description && !imageMultipleChoice) {
+    if ((!description || description.trim() === "") && !imageMultipleChoice) {
       return next({
-        message: "description atau imageMultipleChoice harus diisi salah satu",
+        message: "Description atau imageMultipleChoice harus diisi salah satu",
+        statusCode: 400,
+      });
+    }
+
+    if (!validateImage(imageMultipleChoice)) {
+      return next({
+        message:
+          "Format imageMultipleChoice tidak valid, hanya menerima JPEG dan PNG",
         statusCode: 400,
       });
     }

@@ -10,7 +10,7 @@ exports.getQuestionsByCategory = async (req, res, next) => {
   try {
     const { categoryId } = req.body;
 
-    if (!categoryId || categoryId == "") {
+    if (!categoryId || categoryId.trim() === "") {
       return next({
         message: "categoryId harus diisi!",
         statusCode: 400,
@@ -57,6 +57,14 @@ exports.getPesertaQuestions = async (req, res, next) => {
 
 exports.createQuestions = async (req, res, next) => {
   try {
+    const validateImage = (image) => {
+      const validTypes = ["image/jpeg", "image/png"];
+      if (image && !validTypes.includes(image.mimetype)) {
+        return false;
+      }
+      return true;
+    };
+
     const {
       question,
       point,
@@ -69,14 +77,18 @@ exports.createQuestions = async (req, res, next) => {
       correctAnswer,
     } = req.body;
 
-    if (!point || !Number.isInteger(point)) {
+    const pointInt = parseInt(point, 10);
+    const categoryIdInt = parseInt(categoryId, 10);
+    const correctAnswerInt = parseInt(correctAnswer, 10);
+
+    if (!pointInt || isNaN(pointInt)) {
       return next({
         message: "Poin harus diisi dan bernilai integer yang valid",
         statusCode: 400,
       });
     }
 
-    if (!categoryId || !Number.isInteger(categoryId)) {
+    if (!categoryIdInt || isNaN(categoryIdInt)) {
       return next({
         message: "categoryId harus diisi dan bernilai integer yang valid",
         statusCode: 400,
@@ -84,14 +96,14 @@ exports.createQuestions = async (req, res, next) => {
     }
 
     if (
-      !correctAnswer ||
-      !Number.isInteger(correctAnswer) ||
-      correctAnswer < 1 ||
-      correctAnswer > 5
+      !correctAnswerInt ||
+      isNaN(correctAnswerInt) ||
+      correctAnswerInt < 1 ||
+      correctAnswerInt > 5
     ) {
       return next({
         message:
-          "Poin harus diisi berupa integer dan nilainya antara 1 sampai 5",
+          "correctAnswer harus diisi berupa integer dan nilainya antara 1 sampai 5",
         statusCode: 400,
       });
     }
@@ -103,14 +115,25 @@ exports.createQuestions = async (req, res, next) => {
     const multipleChoiceImg4 = req?.files?.multipleChoiceImg4;
     const multipleChoiceImg5 = req?.files?.multipleChoiceImg5;
 
-    if (!question && !imageQuestion) {
+    if ((!question || question.trim() === "") && !imageQuestion) {
       return next({
         message: "question atau imageQuestion harus diisi salah satu",
         statusCode: 400,
       });
     }
 
-    if (!multipleChoice1 && !multipleChoiceImg1) {
+    if (!validateImage(imageQuestion)) {
+      return next({
+        message:
+          "Format imageQuestion tidak valid, hanya menerima JPEG dan PNG",
+        statusCode: 400,
+      });
+    }
+
+    if (
+      (!multipleChoice1 || multipleChoice1.trim() === "") &&
+      !multipleChoiceImg1
+    ) {
       return next({
         message:
           "multipleChoice1 atau multipleChoiceImg1 harus diisi salah satu",
@@ -118,7 +141,18 @@ exports.createQuestions = async (req, res, next) => {
       });
     }
 
-    if (!multipleChoice2 && !multipleChoiceImg2) {
+    if (!validateImage(multipleChoiceImg1)) {
+      return next({
+        message:
+          "Format multipleChoiceImg1 tidak valid, hanya menerima JPEG dan PNG",
+        statusCode: 400,
+      });
+    }
+
+    if (
+      (!multipleChoice2 || multipleChoice2.trim() === "") &&
+      !multipleChoiceImg2
+    ) {
       return next({
         message:
           "multipleChoice2 atau multipleChoiceImg2 harus diisi salah satu",
@@ -126,7 +160,18 @@ exports.createQuestions = async (req, res, next) => {
       });
     }
 
-    if (!multipleChoice3 && !multipleChoiceImg3) {
+    if (!validateImage(multipleChoiceImg2)) {
+      return next({
+        message:
+          "Format multipleChoiceImg2 tidak valid, hanya menerima JPEG dan PNG",
+        statusCode: 400,
+      });
+    }
+
+    if (
+      (!multipleChoice3 || multipleChoice3.trim() === "") &&
+      !multipleChoiceImg3
+    ) {
       return next({
         message:
           "multipleChoice3 atau multipleChoiceImg3 harus diisi salah satu",
@@ -134,7 +179,18 @@ exports.createQuestions = async (req, res, next) => {
       });
     }
 
-    if (!multipleChoice4 && !multipleChoiceImg4) {
+    if (!validateImage(multipleChoiceImg3)) {
+      return next({
+        message:
+          "Format multipleChoiceImg3 tidak valid, hanya menerima JPEG dan PNG",
+        statusCode: 400,
+      });
+    }
+
+    if (
+      (!multipleChoice4 || multipleChoice4.trim() === "") &&
+      !multipleChoiceImg4
+    ) {
       return next({
         message:
           "multipleChoice4 atau multipleChoiceImg4 harus diisi salah satu",
@@ -142,10 +198,29 @@ exports.createQuestions = async (req, res, next) => {
       });
     }
 
-    if (!multipleChoice5 && !multipleChoiceImg5) {
+    if (!validateImage(multipleChoiceImg4)) {
+      return next({
+        message:
+          "Format multipleChoiceImg4 tidak valid, hanya menerima JPEG dan PNG",
+        statusCode: 400,
+      });
+    }
+
+    if (
+      (!multipleChoice5 || multipleChoice5.trim() === "") &&
+      !multipleChoiceImg5
+    ) {
       return next({
         message:
           "multipleChoice5 atau multipleChoiceImg5 harus diisi salah satu",
+        statusCode: 400,
+      });
+    }
+
+    if (!validateImage(multipleChoiceImg5)) {
+      return next({
+        message:
+          "Format multipleChoiceImg5 tidak valid, hanya menerima JPEG dan PNG",
         statusCode: 400,
       });
     }
@@ -173,15 +248,13 @@ exports.createQuestions = async (req, res, next) => {
       },
     ];
 
-    const correctAnswerInt = parseInt(correctAnswer, 10);
-
     const data = await createQuestion({
       image: imageQuestion,
       question,
       point,
       categoryId,
       multipleChoices,
-      correctAnswer: correctAnswerInt,
+      correctAnswer,
     });
 
     res.status(200).json({
@@ -195,13 +268,29 @@ exports.createQuestions = async (req, res, next) => {
 
 exports.updateQuestionById = async (req, res, next) => {
   try {
+    const validateImage = (image) => {
+      const validTypes = ["image/jpeg", "image/png"];
+      if (image && !validTypes.includes(image.mimetype)) {
+        return false;
+      }
+      return true;
+    };
+
     const { question, point, categoryId } = req.body;
     const questionId = req?.params?.id;
     const imageQuestion = req?.files?.imageQuestion;
 
-    if (!question && !imageQuestion) {
+    if ((!question || question.trim() === "") && !imageQuestion) {
       return next({
         message: "question atau imageQuestion harus diisi salah satu",
+        statusCode: 400,
+      });
+    }
+
+    if (!validateImage(imageQuestion)) {
+      return next({
+        message:
+          "Format imageQuestion tidak valid, hanya menerima JPEG dan PNG",
         statusCode: 400,
       });
     }
@@ -239,7 +328,7 @@ exports.deleteQuestionById = async (req, res, next) => {
   try {
     const id = req?.params?.id;
 
-    if (id == "" || !id) {
+    if (!id || id.trim() === "") {
       return next({
         message: "Id dari question harus diisi",
         statusCode: 400,

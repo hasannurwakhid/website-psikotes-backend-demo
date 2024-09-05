@@ -15,33 +15,71 @@ exports.registerPeserta = async (req, res, next) => {
 
     const image = req?.files?.image;
 
-    if (nik == "" || !nik) {
+    if (!nik || nik.trim() === "") {
       return next({
         message: "NIK harus diisi!",
         statusCode: 400,
       });
     }
-    if (name == "" || !name) {
+    if (nik.length !== 16) {
+      return next({
+        message: "NIK harus terdiri dari 16 digit!",
+        statusCode: 400,
+      });
+    }
+    if (!/^\d+$/.test(nik)) {
+      return next({
+        message: "NIK hanya boleh berisi angka!",
+        statusCode: 400,
+      });
+    }
+    if (!name || name.trim() === "") {
       return next({
         message: "Name harus diisi!",
         statusCode: 400,
       });
     }
-    if (email == "" || !email) {
+    const nameRegex = /^[a-zA-Z\s]+$/;
+    if (!nameRegex.test(name.trim())) {
+      return next({
+        message: "Nama tidak valid!",
+        statusCode: 400,
+      });
+    }
+    if (!email || email.trim() === "") {
       return next({
         message: "Email harus diisi!",
         statusCode: 400,
       });
     }
-    if (phoneNumber == "" || !phoneNumber) {
+    if (!email.includes("@") || !email.includes(".")) {
+      return next({
+        message: "Email tidak valid!",
+        statusCode: 400,
+      });
+    }
+    if (!phoneNumber || phoneNumber.trim() === "") {
       return next({
         message: "Phone Number harus diisi!",
         statusCode: 400,
       });
     }
-    if (password == "" || !password) {
+    const phoneNumberRegex = /^[0-9]{10,14}$/;
+    if (!phoneNumberRegex.test(phoneNumber)) {
+      return next({
+        message: "Nomor telepon tidak valid!",
+        statusCode: 400,
+      });
+    }
+    if (!password || password.trim() === "") {
       return next({
         message: "Password harus diisi!",
+        statusCode: 400,
+      });
+    }
+    if (password && password.trim().length < 8) {
+      return next({
+        message: "Password minimal 8 karakter!",
         statusCode: 400,
       });
     }
@@ -73,33 +111,59 @@ exports.adminRegister = async (req, res, next) => {
 
     const image = req?.files?.image;
 
-    if (nip == "" || !nip) {
+    if (!nip || nip.trim() === "") {
       return next({
         message: "nip harus diisi!",
         statusCode: 400,
       });
     }
-    if (name == "" || !name) {
+    if (!name || name.trim() === "") {
       return next({
         message: "Name harus diisi!",
         statusCode: 400,
       });
     }
-    if (email == "" || !email) {
+    const nameRegex = /^[a-zA-Z\s]+$/;
+    if (!nameRegex.test(name.trim())) {
+      return next({
+        message: "Nama tidak valid!",
+        statusCode: 400,
+      });
+    }
+    if (!email || email.trim() === "") {
       return next({
         message: "Email harus diisi!",
         statusCode: 400,
       });
     }
-    if (phoneNumber == "" || !phoneNumber) {
+    if (!email.includes("@") || !email.includes(".")) {
+      return next({
+        message: "Email tidak valid!",
+        statusCode: 400,
+      });
+    }
+    if (!phoneNumber || phoneNumber.trim() === "") {
       return next({
         message: "Phone Number harus diisi!",
         statusCode: 400,
       });
     }
-    if (password == "" || !password) {
+    const phoneNumberRegex = /^[0-9]{10,14}$/;
+    if (!phoneNumberRegex.test(phoneNumber)) {
+      return next({
+        message: "Nomor telepon tidak valid!",
+        statusCode: 400,
+      });
+    }
+    if (!password || password.trim() === "") {
       return next({
         message: "Password harus diisi!",
+        statusCode: 400,
+      });
+    }
+    if (password && password.trim().length < 8) {
+      return next({
+        message: "Password minimal 8 karakter!",
         statusCode: 400,
       });
     }
@@ -128,13 +192,13 @@ exports.adminRegister = async (req, res, next) => {
 exports.loginPeserta = async (req, res, next) => {
   try {
     const { nik, password } = req.body;
-    if (nik == "" || !nik) {
+    if (!nik || nik.trim() === "") {
       return next({
         message: "NIK harus diisi!",
         statusCode: 400,
       });
     }
-    if (password == "" || !password) {
+    if (!password || password.trim() === "") {
       return next({
         message: "Password harus diisi!",
         statusCode: 400,
@@ -155,13 +219,13 @@ exports.loginPeserta = async (req, res, next) => {
 exports.loginAdmin = async (req, res, next) => {
   try {
     const { nip, password } = req.body;
-    if (nip == "" || !nip) {
+    if (!nip || nip.trim() === "") {
       return next({
         message: "NIP harus diisi!",
         statusCode: 400,
       });
     }
-    if (password == "" || !password) {
+    if (!password || password.trim() === "") {
       return next({
         message: "Password harus diisi!",
         statusCode: 400,
@@ -228,29 +292,63 @@ exports.updateAdminAccoundtById = async (req, res, next) => {
     //   image = userPhoto;
     // }
     const image = req?.files?.image;
-    if (nip == "" || !nip) {
+    if (!nip || nip.trim() === "") {
       return next({
         message: "NIP harus diisi!",
         statusCode: 400,
       });
     }
-    if (name == "" || !name) {
+    if (!name || name.trim() === "") {
       return next({
         message: "Name harus diisi!",
         statusCode: 400,
       });
     }
-    if (email == "" || !email) {
+    const nameRegex = /^[a-zA-Z\s]+$/;
+    if (!nameRegex.test(name.trim())) {
+      return next({
+        message: "Nama tidak valid!",
+        statusCode: 400,
+      });
+    }
+    if (!email || email.trim() === "") {
       return next({
         message: "Email harus diisi!",
         statusCode: 400,
       });
     }
-    if (phoneNumber == "" || !phoneNumber) {
+    if (!email.includes("@") || !email.includes(".")) {
+      return next({
+        message: "Email tidak valid!",
+        statusCode: 400,
+      });
+    }
+    if (!phoneNumber || phoneNumber.trim() === "") {
       return next({
         message: "Phone Number harus diisi!",
         statusCode: 400,
       });
+    }
+    const phoneNumberRegex = /^[0-9]{10,14}$/;
+    if (!phoneNumberRegex.test(phoneNumber)) {
+      return next({
+        message: "Nomor telepon tidak valid!",
+        statusCode: 400,
+      });
+    }
+    if (password) {
+      if (!password || password.trim() === "") {
+        return next({
+          message: "Password harus diisi!",
+          statusCode: 400,
+        });
+      }
+      if (password && password.trim().length < 8) {
+        return next({
+          message: "Password minimal 8 karakter!",
+          statusCode: 400,
+        });
+      }
     }
 
     const data = await updateUserById(id, {
