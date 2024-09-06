@@ -298,8 +298,12 @@ exports.profile = async (req, res, next) => {
 exports.checkIsDone = async (req, res, next) => {
   try {
     const isDone = req?.user?.isDone;
-    const questionOrder = req?.user?.questionOrder;
+    let questionOrder = req?.user?.questionOrder;
     const timeToEnd = req?.user?.timeToEnd;
+
+    if (typeof questionOrder === "string") {
+      questionOrder = JSON.parse(questionOrder);
+    }
 
     let remainingTime = new Date(timeToEnd).getTime() - new Date().getTime();
     if (remainingTime < 0) {
