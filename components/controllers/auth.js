@@ -297,7 +297,22 @@ exports.profile = async (req, res, next) => {
 
 exports.checkIsDone = async (req, res, next) => {
   try {
-    const data = req?.user?.isDone;
+    const isDone = req?.user?.isDone;
+    const questionOrder = req?.user?.questionOrder;
+    const timeToEnd = req?.user?.timeToEnd;
+
+    let remainingTime = new Date(timeToEnd).getTime() - new Date().getTime();
+    if (remainingTime < 0) {
+      remainingTime = 0;
+    }
+
+    const questionCount = questionOrder?.length;
+
+    const data = {
+      isDone,
+      questionCount,
+      remainingTime,
+    };
 
     res.status(200).json({
       message: "Success",
