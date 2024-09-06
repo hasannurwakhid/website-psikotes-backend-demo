@@ -263,7 +263,7 @@ exports.createQuestions = async (req, res, next) => {
       point,
       categoryId,
       multipleChoices,
-      correctAnswer,
+      correctAnswer: correctAnswerInt,
     });
 
     res.status(200).json({
