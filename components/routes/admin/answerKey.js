@@ -4,7 +4,7 @@ const router = express.Router();
 const { udpateAnswerKeyById } = require("../../controllers/answerKey");
 const { authMiddleware } = require("../../../src/middleware/auth");
 
-router.post(
+router.put(
   "/:id",
   authMiddleware(["admin", "superadmin"]),
   udpateAnswerKeyById
