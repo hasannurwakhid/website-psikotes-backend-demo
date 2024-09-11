@@ -16,6 +16,11 @@ const { createAnswerKey } = require("../repositories/answerKeys");
 
 const { getQuestionTime } = require("../repositories/questionTime");
 
+exports.getAllQuestions = async () => {
+  const data = await getAllQuestionId();
+  return data;
+};
+
 exports.getQuestionsByCategory = async (payload) => {
   const data = await getQuestionsByCategory(payload);
   return data;

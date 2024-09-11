@@ -10,6 +10,10 @@ const {
   updateUserById,
 } = require("../services/auth");
 
+const { getQuestionTime } = require("../services/questionTime");
+
+const { getAllQuestions } = require("../services/question");
+
 const dns = require("dns");
 
 const verifyDomain = (domain) => {
@@ -301,16 +305,26 @@ exports.checkIsDone = async (req, res, next) => {
     let questionOrder = req?.user?.questionOrder;
     const timeToEnd = req?.user?.timeToEnd;
 
+    let remainingTime;
+    let questionCount;
+
     if (typeof questionOrder === "string") {
       questionOrder = JSON.parse(questionOrder);
+      questionCount = questionOrder?.length;
+    }
+    if (questionOrder == null) {
+      questionCount = (await getAllQuestions()).length;
     }
 
-    let remainingTime = new Date(timeToEnd).getTime() - new Date().getTime();
-    if (remainingTime < 0) {
-      remainingTime = 0;
+    if (timeToEnd != null) {
+      remainingTime = new Date(timeToEnd).getTime() - new Date().getTime();
+      if (remainingTime < 0) {
+        remainingTime = 0;
+      }
     }
-
-    const questionCount = questionOrder?.length;
+    if (timeToEnd == null) {
+      remainingTime = await getQuestionTime();
+    }
 
     const data = {
       isDone,
