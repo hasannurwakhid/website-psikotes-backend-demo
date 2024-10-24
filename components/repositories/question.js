@@ -97,6 +97,8 @@ exports.updateQuestionById = async (id, payload) => {
 
     const imageUpload = await uploader(image);
     payload.image = imageUpload.secure_url;
+  } else {
+    payload.image = null;
   }
 
   if (payload?.picture) {
