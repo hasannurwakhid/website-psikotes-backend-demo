@@ -9,7 +9,7 @@ module.exports = {
   //   port: process.env.POSTGRES_PORT,
   //   dialect: "postgres",
   //   dialectOptions: {
-  
+
   //     ssl: {
   //       require: true,
   //       rejectUnauthorized: false,
@@ -33,6 +33,12 @@ module.exports = {
     host: process.env.POSTGRES_HOST,
     port: process.env.POSTGRES_PORT,
     dialect: "postgres",
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
   },
   production: {
     username: process.env.POSTGRES_USERNAME,
@@ -41,5 +47,11 @@ module.exports = {
     host: process.env.POSTGRES_HOST,
     port: process.env.POSTGRES_PORT,
     dialect: "postgres",
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
   },
 };
